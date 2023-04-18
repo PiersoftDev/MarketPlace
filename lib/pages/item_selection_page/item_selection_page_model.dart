@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
@@ -13,7 +14,7 @@ class ItemSelectionPageModel extends FlutterFlowModel {
   TextEditingController? itemSearchTextFieldController;
   String? Function(BuildContext, String?)?
       itemSearchTextFieldControllerValidator;
-  Completer<List<ItemsRecord>>? firestoreRequestCompleter;
+  Completer<List<ItemsRecord>>? algoliaRequestCompleter;
 
   /// Initialization and disposal methods.
 
@@ -25,7 +26,7 @@ class ItemSelectionPageModel extends FlutterFlowModel {
 
   /// Additional helper methods are added here.
 
-  Future waitForFirestoreRequestCompleted({
+  Future waitForAlgoliaRequestCompleted({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {
@@ -33,7 +34,7 @@ class ItemSelectionPageModel extends FlutterFlowModel {
     while (true) {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = firestoreRequestCompleter?.isCompleted ?? false;
+      final requestComplete = algoliaRequestCompleter?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

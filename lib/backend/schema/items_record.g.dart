@@ -22,28 +22,28 @@ class _$ItemsRecordSerializer implements StructuredSerializer<ItemsRecord> {
     value = object.id;
     if (value != null) {
       result
-        ..add('id')
+        ..add('Id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.desc;
     if (value != null) {
       result
-        ..add('desc')
+        ..add('Desc')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.groupId;
     if (value != null) {
       result
-        ..add('groupId')
+        ..add('GroupId')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.companyId;
     if (value != null) {
       result
-        ..add('companyId')
+        ..add('CompanyId')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -69,19 +69,19 @@ class _$ItemsRecordSerializer implements StructuredSerializer<ItemsRecord> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'id':
+        case 'Id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'desc':
+        case 'Desc':
           result.desc = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'groupId':
+        case 'GroupId':
           result.groupId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'companyId':
+        case 'CompanyId':
           result.companyId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
