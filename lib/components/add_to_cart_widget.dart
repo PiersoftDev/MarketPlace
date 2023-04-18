@@ -41,6 +41,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -63,7 +65,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                 child: Text(
-                  'Item Code: 123456',
+                  'Item Code:${FFAppState().selectedItemId}',
                   style: FlutterFlowTheme.of(context).bodyMedium,
                 ),
               ),

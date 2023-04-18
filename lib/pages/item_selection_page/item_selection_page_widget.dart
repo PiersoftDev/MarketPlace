@@ -42,6 +42,8 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
@@ -235,6 +237,10 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                       10.0, 10.0, 10.0, 10.0),
                                   child: InkWell(
                                     onTap: () async {
+                                      setState(() {
+                                        FFAppState().selectedItemId =
+                                            testItem.id!;
+                                      });
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
