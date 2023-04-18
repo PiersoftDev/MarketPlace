@@ -150,6 +150,11 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                               ),
                             ),
                           ),
+                          Icon(
+                            Icons.search,
+                            color: Colors.black,
+                            size: 24.0,
+                          ),
                         ],
                       ),
                     ),
