@@ -65,7 +65,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                 child: Text(
-                  'Item Code:${FFAppState().selectedItemId}',
+                  'Item Code:  ${FFAppState().selectedItemId}',
                   style: FlutterFlowTheme.of(context).bodyMedium,
                 ),
               ),
