@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -97,6 +98,11 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                 child: TextFormField(
                                   controller:
                                       _model.itemSearchTextFieldController,
+                                  onChanged: (_) => EasyDebounce.debounce(
+                                    '_model.itemSearchTextFieldController',
+                                    Duration(milliseconds: 100),
+                                    () => setState(() {}),
+                                  ),
                                   autofocus: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
