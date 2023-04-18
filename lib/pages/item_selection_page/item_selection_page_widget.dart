@@ -1,7 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -153,64 +152,61 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                               ),
                             ),
                           ),
-                          if (functions.getSearchValueLength(
-                                  _model.itemSearchTextFieldController.text) ==
-                              true)
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
-                              child: FutureBuilder<List<ItemsRecord>>(
-                                future: (_model.firestoreRequestCompleter ??=
-                                        Completer<List<ItemsRecord>>()
-                                          ..complete(queryItemsRecordOnce(
-                                            queryBuilder: (itemsRecord) =>
-                                                itemsRecord.where('desc',
-                                                    isEqualTo: _model
-                                                        .itemSearchTextFieldController
-                                                        .text),
-                                            singleRecord: true,
-                                          )))
-                                    .future,
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50.0,
-                                        height: 50.0,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                        ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: FutureBuilder<List<ItemsRecord>>(
+                              future: (_model.firestoreRequestCompleter ??=
+                                      Completer<List<ItemsRecord>>()
+                                        ..complete(queryItemsRecordOnce(
+                                          queryBuilder: (itemsRecord) =>
+                                              itemsRecord.where('desc',
+                                                  isEqualTo: _model
+                                                      .itemSearchTextFieldController
+                                                      .text),
+                                          singleRecord: true,
+                                        )))
+                                  .future,
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
                                       ),
-                                    );
-                                  }
-                                  List<ItemsRecord> iconItemsRecordList =
-                                      snapshot.data!;
-                                  // Return an empty Container when the item does not exist.
-                                  if (snapshot.data!.isEmpty) {
-                                    return Container();
-                                  }
-                                  final iconItemsRecord =
-                                      iconItemsRecordList.isNotEmpty
-                                          ? iconItemsRecordList.first
-                                          : null;
-                                  return InkWell(
-                                    onTap: () async {
-                                      setState(() => _model
-                                          .firestoreRequestCompleter = null);
-                                      await _model
-                                          .waitForFirestoreRequestCompleted();
-                                    },
-                                    child: Icon(
-                                      Icons.search,
-                                      color: Colors.black,
-                                      size: 24.0,
                                     ),
                                   );
-                                },
-                              ),
+                                }
+                                List<ItemsRecord> iconItemsRecordList =
+                                    snapshot.data!;
+                                // Return an empty Container when the item does not exist.
+                                if (snapshot.data!.isEmpty) {
+                                  return Container();
+                                }
+                                final iconItemsRecord =
+                                    iconItemsRecordList.isNotEmpty
+                                        ? iconItemsRecordList.first
+                                        : null;
+                                return InkWell(
+                                  onTap: () async {
+                                    setState(() => _model
+                                        .firestoreRequestCompleter = null);
+                                    await _model
+                                        .waitForFirestoreRequestCompleted();
+                                  },
+                                  child: Icon(
+                                    Icons.search,
+                                    color: Colors.black,
+                                    size: 24.0,
+                                  ),
+                                );
+                              },
                             ),
+                          ),
                         ],
                       ),
                     ),
