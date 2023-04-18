@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -162,6 +161,30 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 10.0, 0.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  setState(
+                                      () => _model.algoliaSearchResults = null);
+                                  await ItemsRecord.search(
+                                    term: _model
+                                        .itemSearchTextFieldController.text,
+                                  )
+                                      .then((r) =>
+                                          _model.algoliaSearchResults = r)
+                                      .onError((_, __) =>
+                                          _model.algoliaSearchResults = [])
+                                      .whenComplete(() => setState(() {}));
+                                },
+                                child: Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 24.0,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -175,116 +198,89 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: FutureBuilder<List<ItemsRecord>>(
-                          future: (_model.algoliaRequestCompleter ??=
-                                  Completer<List<ItemsRecord>>()
-                                    ..complete(ItemsRecord.search(
-                                      term: _model
-                                          .itemSearchTextFieldController.text,
-                                    )))
-                              .future,
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
+                        child: Builder(
+                          builder: (context) {
+                            if (_model.algoliaSearchResults
+                                    ?.map((e) => e)
+                                    .toList() ==
+                                null) {
                               return Center(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20.0, 20.0, 20.0, 20.0),
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                    ),
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context).primary,
                                   ),
                                 ),
                               );
                             }
-                            List<ItemsRecord> listViewItemsRecordList =
-                                snapshot.data!;
-                            // Customize what your widget looks like with no search results.
-                            if (snapshot.data!.isEmpty) {
-                              return Container(
-                                height: 100,
-                                child: Center(
-                                  child: Text('No results.'),
-                                ),
-                              );
-                            }
-                            return RefreshIndicator(
-                              onRefresh: () async {
-                                setState(() =>
-                                    _model.algoliaRequestCompleter = null);
-                                await _model.waitForAlgoliaRequestCompleted();
-                              },
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: listViewItemsRecordList.length,
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewItemsRecord =
-                                      listViewItemsRecordList[listViewIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 10.0, 10.0, 10.0),
-                                    child: Container(
-                                      width: 100.0,
-                                      height: 100.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                            child: Text(
-                                              listViewItemsRecord.desc!,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 30.0,
-                                                borderWidth: 1.0,
-                                                buttonSize: 60.0,
-                                                icon: Icon(
-                                                  Icons.add_shopping_cart,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  size: 30.0,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'IconButton pressed ...');
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                            final test = _model.algoliaSearchResults
+                                    ?.map((e) => e)
+                                    .toList()
+                                    ?.toList() ??
+                                [];
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: test.length,
+                              itemBuilder: (context, testIndex) {
+                                final testItem = test[testIndex];
+                                return Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 10.0, 10.0, 10.0),
+                                  child: Container(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      border: Border.all(
+                                        color: Color(0xFFC23F3F),
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 10.0, 10.0, 10.0),
+                                          child: Text(
+                                            testItem.desc!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            FlutterFlowIconButton(
+                                              borderColor: Colors.transparent,
+                                              borderRadius: 30.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 60.0,
+                                              icon: Icon(
+                                                Icons.add_shopping_cart,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                size: 30.0,
+                                              ),
+                                              onPressed: () {
+                                                print('IconButton pressed ...');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           },
                         ),
