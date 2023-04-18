@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "800428311109",
+    "project_id": "gatepass-380112",
+    "storage_bucket": "gatepass-380112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800428311109:android:4ced5d867988a9b3c8d92c",
+        "android_client_info": {
+          "package_name": "com.kmv.gatepass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800428311109-k0m39nlm5crg3ritfq1nbga3insl73vd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kmv.gatepass",
+            "certificate_hash": "abe2a8d1be366c00087554c2d6c0ee604fce52b9"
+          }
+        },
+        {
+          "client_id": "800428311109-tmnf50m9utldqqmgnvgned2ucffqk7fn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kmv.gatepass",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "800428311109-af3ivdvobb4hime6ehk1n3c6iee660ad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW00QD-Zfah2miVUEdCOUR87BIA8h1fSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800428311109-af3ivdvobb4hime6ehk1n3c6iee660ad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "800428311109-5gaum78tkksr6bahfsk5n0c5kkh54b1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kmv.kmvmarketplace"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800428311109:android:4886cd2608706f8bc8d92c",
+        "android_client_info": {
+          "package_name": "com.kmv.kmvmarketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "800428311109-jl3nb44i05ec23arps6tcgptqji9bmee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kmv.kmvmarketplace",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "800428311109-af3ivdvobb4hime6ehk1n3c6iee660ad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW00QD-Zfah2miVUEdCOUR87BIA8h1fSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "800428311109-af3ivdvobb4hime6ehk1n3c6iee660ad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "800428311109-5gaum78tkksr6bahfsk5n0c5kkh54b1i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kmv.kmvmarketplace"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
