@@ -252,7 +252,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height *
-                                                    0.4,
+                                                    0.6,
                                                 child: AddToCartWidget(),
                                               ),
                                             ),

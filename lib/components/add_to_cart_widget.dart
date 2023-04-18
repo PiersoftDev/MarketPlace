@@ -84,7 +84,6 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           width: MediaQuery.of(context).size.width * 0.05,
                           child: TextFormField(
                             controller: _model.textController1,
-                            autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintStyle: FlutterFlowTheme.of(context).bodySmall,
@@ -97,7 +96,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
+                                  color: Color(0xFFC23F3F),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -144,7 +143,6 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           width: MediaQuery.of(context).size.width * 0.1,
                           child: TextFormField(
                             controller: _model.textController2,
-                            autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
                               hintStyle: FlutterFlowTheme.of(context).bodySmall,
@@ -157,7 +155,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0x00000000),
+                                  color: Color(0xFFC23F3F),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
