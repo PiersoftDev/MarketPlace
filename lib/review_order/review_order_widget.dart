@@ -133,8 +133,8 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: StreamBuilder<List<ItemsRecord>>(
-                                stream: queryItemsRecord(),
+                              child: StreamBuilder<List<UsersRecord>>(
+                                stream: queryUsersRecord(),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -149,7 +149,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                       ),
                                     );
                                   }
-                                  List<ItemsRecord> dataTableItemsRecordList =
+                                  List<UsersRecord> dataTableUsersRecordList =
                                       snapshot.data!;
                                   return DataTable2(
                                     columns: [
@@ -205,9 +205,9 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                         ),
                                       ),
                                     ],
-                                    rows: dataTableItemsRecordList
+                                    rows: dataTableUsersRecordList
                                         .mapIndexed((dataTableIndex,
-                                                dataTableItemsRecord) =>
+                                                dataTableUsersRecord) =>
                                             [
                                               Text(
                                                 'steel',
