@@ -192,8 +192,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      Navigator.pop(context);
                     },
                     text: 'Add To Cart',
                     options: FFButtonOptions(
