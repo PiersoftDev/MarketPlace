@@ -1,8 +1,8 @@
-import '/flutter_flow/flutter_flow_choice_chips.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -54,123 +54,255 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
               decoration: BoxDecoration(
                 color: Color(0xFFEAE6E2),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowChoiceChips(
-                          options: [ChipData('Option 1', Icons.train_outlined)],
-                          onChanged: (val) => setState(
-                              () => _model.choiceChipsValue1 = val?.first),
-                          selectedChipStyle: ChipStyle(
-                            backgroundColor: Color(0xFFE3E7ED),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
-                            iconColor: Colors.white,
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          unselectedChipStyle: ChipStyle(
-                            backgroundColor: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodySmall.override(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: Text(
+                                'Order Summary',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
                                       fontFamily: 'Poppins',
-                                      color: Color(0xFFE3E7ED),
+                                      fontSize: 24.0,
                                     ),
-                            iconColor: Color(0xFFE3E7ED),
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          chipSpacing: 20.0,
-                          multiselect: false,
-                          initialized: _model.choiceChipsValue1 != null,
-                          alignment: WrapAlignment.start,
-                          controller: _model.choiceChipsValueController1 ??=
-                              FormFieldController<List<String>>(
-                            [FFAppState().selectedProjectId],
-                          ),
-                        ),
-                        FlutterFlowChoiceChips(
-                          options: [ChipData('Option 1', Icons.train_outlined)],
-                          onChanged: (val) => setState(
-                              () => _model.choiceChipsValue2 = val?.first),
-                          selectedChipStyle: ChipStyle(
-                            backgroundColor: Color(0xFFE3E7ED),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 0.0, 0.0),
+                                child: Text(
+                                  'Project : ${FFAppState().selectedProjectId}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18.0,
+                                      ),
                                 ),
-                            iconColor: Colors.white,
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          unselectedChipStyle: ChipStyle(
-                            backgroundColor: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodySmall.override(
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 0.0, 0.0),
+                                child: Text(
+                                  'Activity  : ${FFAppState().selectedActivityId}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18.0,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 10.0, 0.0, 0.0),
+                              child: Text(
+                                'Items',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
                                       fontFamily: 'Poppins',
-                                      color: Color(0xFFE3E7ED),
+                                      fontSize: 24.0,
                                     ),
-                            iconColor: Color(0xFFE3E7ED),
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          chipSpacing: 20.0,
-                          multiselect: false,
-                          initialized: _model.choiceChipsValue2 != null,
-                          alignment: WrapAlignment.start,
-                          controller: _model.choiceChipsValueController2 ??=
-                              FormFieldController<List<String>>(
-                            [FFAppState().selectedActivityId],
-                          ),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: 453.3,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: StreamBuilder<List<ItemsRecord>>(
+                                stream: queryItemsRecord(),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<ItemsRecord> dataTableItemsRecordList =
+                                      snapshot.data!;
+                                  return DataTable2(
+                                    columns: [
+                                      DataColumn2(
+                                        label: DefaultTextStyle.merge(
+                                          softWrap: true,
+                                          child: Text(
+                                            'Item Desc',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        label: DefaultTextStyle.merge(
+                                          softWrap: true,
+                                          child: Text(
+                                            'Qty',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                      DataColumn2(
+                                        label: DefaultTextStyle.merge(
+                                          softWrap: true,
+                                          child: Text(
+                                            'UOM',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                    rows: dataTableItemsRecordList
+                                        .mapIndexed((dataTableIndex,
+                                                dataTableItemsRecord) =>
+                                            [
+                                              Text(
+                                                'steel',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                              ),
+                                              Text(
+                                                '10',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                              ),
+                                              Text(
+                                                'MT',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                              ),
+                                            ].map((c) => DataCell(c)).toList())
+                                        .map((e) => DataRow(cells: e))
+                                        .toList(),
+                                    headingRowColor: MaterialStateProperty.all(
+                                      FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                    ),
+                                    headingRowHeight: 30.0,
+                                    dataRowColor: MaterialStateProperty.all(
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    dataRowHeight: 40.0,
+                                    border: TableBorder(
+                                      borderRadius: BorderRadius.circular(0.0),
+                                    ),
+                                    dividerThickness: 1.0,
+                                    showBottomBorder: false,
+                                    minWidth: 49.0,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed('OrderSubmitSuccess');
-                      },
-                      text: 'Submit Order',
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: Color(0xFF235082),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          20.0, 20.0, 20.0, 20.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed('OrderSubmitSuccess');
+                        },
+                        text: 'Submit Order',
+                        options: FFButtonOptions(
+                          width: 130.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: Color(0xFF235082),
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
