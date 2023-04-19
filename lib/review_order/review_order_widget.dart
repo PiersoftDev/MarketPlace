@@ -133,8 +133,8 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: StreamBuilder<List<UsersRecord>>(
-                                stream: queryUsersRecord(),
+                              child: StreamBuilder<List<MpProjectsRecord>>(
+                                stream: queryMpProjectsRecord(),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -149,7 +149,8 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                       ),
                                     );
                                   }
-                                  List<UsersRecord> dataTableUsersRecordList =
+                                  List<MpProjectsRecord>
+                                      dataTableMpProjectsRecordList =
                                       snapshot.data!;
                                   return DataTable2(
                                     columns: [
@@ -205,9 +206,9 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                         ),
                                       ),
                                     ],
-                                    rows: dataTableUsersRecordList
+                                    rows: dataTableMpProjectsRecordList
                                         .mapIndexed((dataTableIndex,
-                                                dataTableUsersRecord) =>
+                                                dataTableMpProjectsRecord) =>
                                             [
                                               Text(
                                                 'steel',
