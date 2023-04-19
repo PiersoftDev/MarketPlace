@@ -278,6 +278,11 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed('OrderSubmitSuccess');
+
+                          await Future.delayed(
+                              const Duration(milliseconds: 3000));
+
+                          context.pushNamed('Dashboard');
                         },
                         text: 'Submit Order',
                         options: FFButtonOptions(
