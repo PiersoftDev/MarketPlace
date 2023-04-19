@@ -51,12 +51,22 @@ class _OrderSubmitSuccessWidgetState extends State<OrderSubmitSuccessWidget> {
             decoration: BoxDecoration(
               color: Color(0xFFEAE6E2),
             ),
-            child: Lottie.asset(
-              'assets/lottie_animations/96237-success.json',
-              width: 150.0,
-              height: 130.0,
-              fit: BoxFit.contain,
-              animate: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset(
+                  'assets/lottie_animations/96237-success.json',
+                  width: 150.0,
+                  height: 130.0,
+                  fit: BoxFit.contain,
+                  animate: true,
+                ),
+                Text(
+                  'Succesfully submitted your order',
+                  style: FlutterFlowTheme.of(context).bodyMedium,
+                ),
+              ],
             ),
           ),
         ),
