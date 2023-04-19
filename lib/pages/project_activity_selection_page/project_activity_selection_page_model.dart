@@ -10,9 +10,13 @@ class ProjectActivitySelectionPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController;
+  TextEditingController? itemSearchTextFieldController1;
   String? Function(BuildContext, String?)?
-      itemSearchTextFieldControllerValidator;
+      itemSearchTextFieldController1Validator;
+  // State field(s) for ItemSearchTextField widget.
+  TextEditingController? itemSearchTextFieldController2;
+  String? Function(BuildContext, String?)?
+      itemSearchTextFieldController2Validator;
   // Algolia Search Results from action on Icon
   List<ProjectActivityRecord>? algoliaSearchResults = [];
 
@@ -21,7 +25,8 @@ class ProjectActivitySelectionPageModel extends FlutterFlowModel {
   void initState(BuildContext context) {}
 
   void dispose() {
-    itemSearchTextFieldController?.dispose();
+    itemSearchTextFieldController1?.dispose();
+    itemSearchTextFieldController2?.dispose();
   }
 
   /// Additional helper methods are added here.
