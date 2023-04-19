@@ -14,20 +14,16 @@ class ItemSelectionPageModel extends FlutterFlowModel {
   TextEditingController? itemSearchTextFieldController1;
   String? Function(BuildContext, String?)?
       itemSearchTextFieldController1Validator;
-  // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults1 = [];
   // State field(s) for ItemSearchTextField widget.
   TextEditingController? itemSearchTextFieldController2;
   String? Function(BuildContext, String?)?
       itemSearchTextFieldController2Validator;
-  // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults2 = [];
   // State field(s) for ItemSearchTextField widget.
   TextEditingController? itemSearchTextFieldController3;
   String? Function(BuildContext, String?)?
       itemSearchTextFieldController3Validator;
   // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults3 = [];
+  List<ItemsRecord>? algoliaSearchResults = [];
 
   /// Initialization and disposal methods.
 
