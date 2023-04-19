@@ -184,67 +184,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       .fromSTEB(10.0, 10.0,
                                                           10.0, 10.0),
                                                   child: FaIcon(
-                                                    FontAwesomeIcons.listOl,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .success,
-                                                    size: 18.0,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Make a list',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 12.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 30.0),
-                                        child: Icon(
-                                          Icons.double_arrow,
-                                          color: Colors.black,
-                                          size: 24.0,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 75.0,
-                                        height: 75.0,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFEDF1D6),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              width: 40.0,
-                                              height: 40.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.1, 0.0),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(10.0, 10.0,
-                                                          10.0, 10.0),
-                                                  child: FaIcon(
                                                     FontAwesomeIcons.road,
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -337,6 +276,67 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                           ],
                                         ),
                                       ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 30.0),
+                                        child: Icon(
+                                          Icons.double_arrow,
+                                          color: Colors.black,
+                                          size: 24.0,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 75.0,
+                                        height: 75.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFEDF1D6),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: 40.0,
+                                              height: 40.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.1, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10.0, 10.0,
+                                                          10.0, 10.0),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.listOl,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .success,
+                                                    size: 18.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Make a list',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 12.0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -347,7 +347,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                         0.0, 10.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        context.goNamed('ItemSelectionPage');
+                                        context
+                                            .pushNamed('ProjectSelectionPage');
                                       },
                                       text: 'Make a list now',
                                       options: FFButtonOptions(
