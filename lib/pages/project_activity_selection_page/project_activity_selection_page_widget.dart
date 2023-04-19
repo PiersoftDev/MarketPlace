@@ -6,19 +6,20 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'item_selection_page_model.dart';
-export 'item_selection_page_model.dart';
+import 'project_activity_selection_page_model.dart';
+export 'project_activity_selection_page_model.dart';
 
-class ItemSelectionPageWidget extends StatefulWidget {
-  const ItemSelectionPageWidget({Key? key}) : super(key: key);
+class ProjectActivitySelectionPageWidget extends StatefulWidget {
+  const ProjectActivitySelectionPageWidget({Key? key}) : super(key: key);
 
   @override
-  _ItemSelectionPageWidgetState createState() =>
-      _ItemSelectionPageWidgetState();
+  _ProjectActivitySelectionPageWidgetState createState() =>
+      _ProjectActivitySelectionPageWidgetState();
 }
 
-class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
-  late ItemSelectionPageModel _model;
+class _ProjectActivitySelectionPageWidgetState
+    extends State<ProjectActivitySelectionPageWidget> {
+  late ProjectActivitySelectionPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -26,7 +27,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ItemSelectionPageModel());
+    _model = createModel(context, () => ProjectActivitySelectionPageModel());
 
     _model.itemSearchTextFieldController1 ??= TextEditingController();
     _model.itemSearchTextFieldController2 ??= TextEditingController();

@@ -429,6 +429,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     10.0, 10.0, 10.0, 10.0),
                                 child: Container(
                                   decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 4.0,
+                                        color: Color(0x33000000),
+                                        offset: Offset(0.0, 2.0),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8.0),
                                     border: Border.all(
                                       color: Color(0xFFC23F3F),
                                     ),

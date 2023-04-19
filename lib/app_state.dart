@@ -30,6 +30,42 @@ class FFAppState extends ChangeNotifier {
   set selectedItemId(String _value) {
     _selectedItemId = _value;
   }
+
+  List<DocumentReference> _itemsList = [];
+  List<DocumentReference> get itemsList => _itemsList;
+  set itemsList(List<DocumentReference> _value) {
+    _itemsList = _value;
+  }
+
+  void addToItemsList(DocumentReference _value) {
+    _itemsList.add(_value);
+  }
+
+  void removeFromItemsList(DocumentReference _value) {
+    _itemsList.remove(_value);
+  }
+
+  void removeAtIndexFromItemsList(int _index) {
+    _itemsList.removeAt(_index);
+  }
+
+  DocumentReference? _selectedItemDetails;
+  DocumentReference? get selectedItemDetails => _selectedItemDetails;
+  set selectedItemDetails(DocumentReference? _value) {
+    _selectedItemDetails = _value;
+  }
+
+  String _selectedProjectId = '';
+  String get selectedProjectId => _selectedProjectId;
+  set selectedProjectId(String _value) {
+    _selectedProjectId = _value;
+  }
+
+  String _selectedActivityId = '';
+  String get selectedActivityId => _selectedActivityId;
+  set selectedActivityId(String _value) {
+    _selectedActivityId = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

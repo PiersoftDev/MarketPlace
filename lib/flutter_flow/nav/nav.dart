@@ -106,6 +106,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ItemSelectionPage',
           path: '/itemSelectionPage',
           builder: (context, params) => ItemSelectionPageWidget(),
+        ),
+        FFRoute(
+          name: 'ProjectSelectionPage',
+          path: '/projectSelectionPage',
+          builder: (context, params) => ProjectSelectionPageWidget(),
+        ),
+        FFRoute(
+          name: 'ProjectActivitySelectionPage',
+          path: '/projectActivitySelectionPage',
+          builder: (context, params) => ProjectActivitySelectionPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

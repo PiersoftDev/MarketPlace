@@ -3,6 +3,9 @@ import 'package:from_css_color/from_css_color.dart';
 
 import 'users_record.dart';
 import 'items_record.dart';
+import 'material_indent_record.dart';
+import 'mp_projects_record.dart';
+import 'project_activity_record.dart';
 
 import 'index.dart';
 
@@ -16,6 +19,10 @@ const kDocumentReferenceField = 'Document__Reference__Field';
 @SerializersFor(const [
   UsersRecord,
   ItemsRecord,
+  MaterialIndentRecord,
+  MpProjectsRecord,
+  ProjectActivityRecord,
+  MaterialItemStruct,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
