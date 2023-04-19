@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -243,33 +242,9 @@ class _ProjectSelectionPageWidgetState
                                   child: InkWell(
                                     onTap: () async {
                                       setState(() {
-                                        FFAppState().selectedItemId =
-                                            testItem.id!;
+                                        FFAppState().selectedProjectId =
+                                            testItem.desc!;
                                       });
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        enableDrag: false,
-                                        context: context,
-                                        builder: (bottomSheetContext) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .requestFocus(_unfocusNode),
-                                            child: Padding(
-                                              padding: MediaQuery.of(
-                                                      bottomSheetContext)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.6,
-                                                child: AddToCartWidget(),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => setState(() {}));
                                     },
                                     child: Container(
                                       width: 100.0,

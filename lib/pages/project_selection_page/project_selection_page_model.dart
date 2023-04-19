@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';

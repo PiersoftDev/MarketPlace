@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -11,32 +10,18 @@ class ProjectActivitySelectionPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController1;
+  TextEditingController? itemSearchTextFieldController;
   String? Function(BuildContext, String?)?
-      itemSearchTextFieldController1Validator;
+      itemSearchTextFieldControllerValidator;
   // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults1 = [];
-  // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController2;
-  String? Function(BuildContext, String?)?
-      itemSearchTextFieldController2Validator;
-  // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults2 = [];
-  // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController3;
-  String? Function(BuildContext, String?)?
-      itemSearchTextFieldController3Validator;
-  // Algolia Search Results from action on Icon
-  List<ItemsRecord>? algoliaSearchResults3 = [];
+  List<ProjectActivityRecord>? algoliaSearchResults = [];
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
   void dispose() {
-    itemSearchTextFieldController1?.dispose();
-    itemSearchTextFieldController2?.dispose();
-    itemSearchTextFieldController3?.dispose();
+    itemSearchTextFieldController?.dispose();
   }
 
   /// Additional helper methods are added here.

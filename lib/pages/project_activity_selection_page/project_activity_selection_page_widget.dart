@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -29,9 +28,7 @@ class _ProjectActivitySelectionPageWidgetState
     super.initState();
     _model = createModel(context, () => ProjectActivitySelectionPageModel());
 
-    _model.itemSearchTextFieldController1 ??= TextEditingController();
-    _model.itemSearchTextFieldController2 ??= TextEditingController();
-    _model.itemSearchTextFieldController3 ??= TextEditingController();
+    _model.itemSearchTextFieldController ??= TextEditingController();
   }
 
   @override
@@ -96,16 +93,16 @@ class _ProjectActivitySelectionPageWidgetState
                                           10.0, 0.0, 30.0, 0.0),
                                       child: TextFormField(
                                         controller: _model
-                                            .itemSearchTextFieldController1,
+                                            .itemSearchTextFieldController,
                                         onChanged: (_) => EasyDebounce.debounce(
-                                          '_model.itemSearchTextFieldController1',
+                                          '_model.itemSearchTextFieldController',
                                           Duration(milliseconds: 100),
                                           () => setState(() {}),
                                         ),
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          hintText: 'Pick a project',
+                                          hintText: 'Pick an activity',
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .bodySmall,
@@ -162,7 +159,7 @@ class _ProjectActivitySelectionPageWidgetState
                                             .bodyMedium,
                                         textAlign: TextAlign.start,
                                         validator: _model
-                                            .itemSearchTextFieldController1Validator
+                                            .itemSearchTextFieldControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -172,17 +169,17 @@ class _ProjectActivitySelectionPageWidgetState
                                         0.0, 0.0, 10.0, 0.0),
                                     child: InkWell(
                                       onTap: () async {
-                                        setState(() => _model
-                                            .algoliaSearchResults1 = null);
-                                        await ItemsRecord.search(
+                                        setState(() =>
+                                            _model.algoliaSearchResults = null);
+                                        await ProjectActivityRecord.search(
                                           term: _model
-                                              .itemSearchTextFieldController1
+                                              .itemSearchTextFieldController
                                               .text,
                                         )
-                                            .then((r) => _model
-                                                .algoliaSearchResults1 = r)
+                                            .then((r) =>
+                                                _model.algoliaSearchResults = r)
                                             .onError((_, __) => _model
-                                                .algoliaSearchResults1 = [])
+                                                .algoliaSearchResults = [])
                                             .whenComplete(
                                                 () => setState(() {}));
                                       },
@@ -194,254 +191,6 @@ class _ProjectActivitySelectionPageWidgetState
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border: Border.all(
-                                    color: Color(0xFFC23F3F),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 30.0, 0.0),
-                                        child: TextFormField(
-                                          controller: _model
-                                              .itemSearchTextFieldController2,
-                                          onChanged: (_) =>
-                                              EasyDebounce.debounce(
-                                            '_model.itemSearchTextFieldController2',
-                                            Duration(milliseconds: 100),
-                                            () => setState(() {}),
-                                          ),
-                                          autofocus: true,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            hintText: 'Select an activity',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall,
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            errorBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedErrorBorder:
-                                                UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                          textAlign: TextAlign.start,
-                                          validator: _model
-                                              .itemSearchTextFieldController2Validator
-                                              .asValidator(context),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 10.0, 0.0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          setState(() => _model
-                                              .algoliaSearchResults2 = null);
-                                          await ItemsRecord.search(
-                                            term: _model
-                                                .itemSearchTextFieldController2
-                                                .text,
-                                          )
-                                              .then((r) => _model
-                                                  .algoliaSearchResults2 = r)
-                                              .onError((_, __) => _model
-                                                  .algoliaSearchResults2 = [])
-                                              .whenComplete(
-                                                  () => setState(() {}));
-                                        },
-                                        child: Icon(
-                                          Icons.search,
-                                          color: Colors.black,
-                                          size: 24.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border: Border.all(
-                                    color: Color(0xFFC23F3F),
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 30.0, 0.0),
-                                        child: TextFormField(
-                                          controller: _model
-                                              .itemSearchTextFieldController3,
-                                          onChanged: (_) =>
-                                              EasyDebounce.debounce(
-                                            '_model.itemSearchTextFieldController3',
-                                            Duration(milliseconds: 100),
-                                            () => setState(() {}),
-                                          ),
-                                          autofocus: true,
-                                          obscureText: false,
-                                          decoration: InputDecoration(
-                                            hintText: 'Select an item',
-                                            hintStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodySmall,
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            errorBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            focusedErrorBorder:
-                                                UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color(0x00000000),
-                                                width: 1.0,
-                                              ),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(4.0),
-                                                topRight: Radius.circular(4.0),
-                                              ),
-                                            ),
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                          textAlign: TextAlign.start,
-                                          validator: _model
-                                              .itemSearchTextFieldController3Validator
-                                              .asValidator(context),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 10.0, 0.0),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          setState(() => _model
-                                              .algoliaSearchResults3 = null);
-                                          await ItemsRecord.search(
-                                            term: _model
-                                                .itemSearchTextFieldController3
-                                                .text,
-                                          )
-                                              .then((r) => _model
-                                                  .algoliaSearchResults3 = r)
-                                              .onError((_, __) => _model
-                                                  .algoliaSearchResults3 = [])
-                                              .whenComplete(
-                                                  () => setState(() {}));
-                                        },
-                                        child: Icon(
-                                          Icons.search,
-                                          color: Colors.black,
-                                          size: 24.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ),
                             ),
                           ],
@@ -467,7 +216,7 @@ class _ProjectActivitySelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults1 == null) {
+                            if (_model.algoliaSearchResults == null) {
                               return Center(
                                 child: SizedBox(
                                   width: 50.0,
@@ -479,7 +228,7 @@ class _ProjectActivitySelectionPageWidgetState
                               );
                             }
                             final test =
-                                _model.algoliaSearchResults1?.toList() ?? [];
+                                _model.algoliaSearchResults?.toList() ?? [];
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -493,33 +242,9 @@ class _ProjectActivitySelectionPageWidgetState
                                   child: InkWell(
                                     onTap: () async {
                                       setState(() {
-                                        FFAppState().selectedItemId =
-                                            testItem.id!;
+                                        FFAppState().selectedActivityId =
+                                            testItem.desc!;
                                       });
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        enableDrag: false,
-                                        context: context,
-                                        builder: (bottomSheetContext) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .requestFocus(_unfocusNode),
-                                            child: Padding(
-                                              padding: MediaQuery.of(
-                                                      bottomSheetContext)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.6,
-                                                child: AddToCartWidget(),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => setState(() {}));
                                     },
                                     child: Container(
                                       width: 100.0,
