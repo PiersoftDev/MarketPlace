@@ -555,8 +555,8 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 20.0, 20.0, 20.0),
                             child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
+                              onPressed: () async {
+                                context.pushNamed('ReviewOrder');
                               },
                               text: 'Review Order',
                               options: FFButtonOptions(
