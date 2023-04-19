@@ -245,6 +245,8 @@ class _ProjectActivitySelectionPageWidgetState
                                         FFAppState().selectedActivityId =
                                             testItem.desc!;
                                       });
+
+                                      context.pushNamed('ItemSelectionPage');
                                     },
                                     child: Container(
                                       width: 100.0,
