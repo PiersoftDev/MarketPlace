@@ -167,9 +167,7 @@ class _ProjectSelectionPageWidgetState
                             size: 24.0,
                           ),
                           onPressed: () async {
-                            setState(() {
-                              _model.textController?.clear();
-                            });
+                            context.pushNamed('ProjectSelectionPage');
                           },
                         ),
                       ],
