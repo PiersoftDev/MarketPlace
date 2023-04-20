@@ -426,12 +426,8 @@ class _ProjectActivitySelectionPageWidgetState
                           builder: (context) {
                             if (_model.algoliaSearchResults == null) {
                               return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                  ),
+                                child: LinearProgressIndicator(
+                                  color: FlutterFlowTheme.of(context).alternate,
                                 ),
                               );
                             }
