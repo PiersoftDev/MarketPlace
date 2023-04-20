@@ -97,23 +97,22 @@ class _ProjectSelectionPageWidgetState
                                         onChanged: (_) => EasyDebounce.debounce(
                                           '_model.itemSearchTextFieldController',
                                           Duration(milliseconds: 100),
-                                          () => setState(() {}),
+                                          () async {
+                                            setState(() => _model
+                                                .algoliaSearchResults = null);
+                                            await MpProjectsRecord.search(
+                                              term: _model
+                                                  .itemSearchTextFieldController
+                                                  .text,
+                                            )
+                                                .then((r) => _model
+                                                    .algoliaSearchResults = r)
+                                                .onError((_, __) => _model
+                                                    .algoliaSearchResults = [])
+                                                .whenComplete(
+                                                    () => setState(() {}));
+                                          },
                                         ),
-                                        onFieldSubmitted: (_) async {
-                                          setState(() => _model
-                                              .algoliaSearchResults = null);
-                                          await MpProjectsRecord.search(
-                                            term: _model
-                                                .itemSearchTextFieldController
-                                                .text,
-                                          )
-                                              .then((r) => _model
-                                                  .algoliaSearchResults = r)
-                                              .onError((_, __) => _model
-                                                  .algoliaSearchResults = [])
-                                              .whenComplete(
-                                                  () => setState(() {}));
-                                        },
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
