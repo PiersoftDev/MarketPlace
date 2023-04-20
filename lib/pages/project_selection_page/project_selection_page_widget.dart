@@ -75,15 +75,15 @@ class _ProjectSelectionPageWidgetState
                                 '_model.textController',
                                 Duration(milliseconds: 100),
                                 () async {
-                                  setState(
-                                      () => _model.algoliaSearchResults = null);
+                                  setState(() =>
+                                      _model.algoliaSearchResults1 = null);
                                   await MpProjectsRecord.search(
                                     term: _model.textController.text,
                                   )
                                       .then((r) =>
-                                          _model.algoliaSearchResults = r)
+                                          _model.algoliaSearchResults1 = r)
                                       .onError((_, __) =>
-                                          _model.algoliaSearchResults = [])
+                                          _model.algoliaSearchResults1 = [])
                                       .whenComplete(() => setState(() {}));
                                 },
                               ),
@@ -170,6 +170,14 @@ class _ProjectSelectionPageWidgetState
                             setState(() {
                               _model.textController?.clear();
                             });
+                            setState(() => _model.algoliaSearchResults2 = null);
+                            await MpProjectsRecord.search(
+                              term: _model.textController.text,
+                            )
+                                .then((r) => _model.algoliaSearchResults2 = r)
+                                .onError((_, __) =>
+                                    _model.algoliaSearchResults2 = [])
+                                .whenComplete(() => setState(() {}));
                           },
                         ),
                       ],
@@ -193,7 +201,7 @@ class _ProjectSelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults == null) {
+                            if (_model.algoliaSearchResults1 == null) {
                               return Center(
                                 child: LinearProgressIndicator(
                                   color: FlutterFlowTheme.of(context).alternate,
@@ -201,7 +209,7 @@ class _ProjectSelectionPageWidgetState
                               );
                             }
                             final test =
-                                _model.algoliaSearchResults?.toList() ?? [];
+                                _model.algoliaSearchResults1?.toList() ?? [];
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
