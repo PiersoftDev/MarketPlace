@@ -75,15 +75,15 @@ class _ProjectSelectionPageWidgetState
                                 '_model.textController',
                                 Duration(milliseconds: 100),
                                 () async {
-                                  setState(() =>
-                                      _model.algoliaSearchResults1 = null);
+                                  setState(
+                                      () => _model.algoliaSearchResults = null);
                                   await MpProjectsRecord.search(
                                     term: _model.textController.text,
                                   )
                                       .then((r) =>
-                                          _model.algoliaSearchResults1 = r)
+                                          _model.algoliaSearchResults = r)
                                       .onError((_, __) =>
-                                          _model.algoliaSearchResults1 = [])
+                                          _model.algoliaSearchResults = [])
                                       .whenComplete(() => setState(() {}));
                                 },
                               ),
@@ -163,21 +163,13 @@ class _ProjectSelectionPageWidgetState
                           buttonSize: 60.0,
                           icon: Icon(
                             Icons.close,
-                            color: FlutterFlowTheme.of(context).error,
+                            color: FlutterFlowTheme.of(context).alternate,
                             size: 24.0,
                           ),
                           onPressed: () async {
                             setState(() {
                               _model.textController?.clear();
                             });
-                            setState(() => _model.algoliaSearchResults2 = null);
-                            await MpProjectsRecord.search(
-                              term: _model.textController.text,
-                            )
-                                .then((r) => _model.algoliaSearchResults2 = r)
-                                .onError((_, __) =>
-                                    _model.algoliaSearchResults2 = [])
-                                .whenComplete(() => setState(() {}));
                           },
                         ),
                       ],
@@ -201,22 +193,25 @@ class _ProjectSelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults1 == null) {
+                            if (_model.algoliaSearchResults == null) {
                               return Center(
                                 child: LinearProgressIndicator(
                                   color: FlutterFlowTheme.of(context).alternate,
                                 ),
                               );
                             }
-                            final test =
-                                _model.algoliaSearchResults1?.toList() ?? [];
+                            final projectSearchResults =
+                                _model.algoliaSearchResults?.toList() ?? [];
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              itemCount: test.length,
-                              itemBuilder: (context, testIndex) {
-                                final testItem = test[testIndex];
+                              itemCount: projectSearchResults.length,
+                              itemBuilder:
+                                  (context, projectSearchResultsIndex) {
+                                final projectSearchResultsItem =
+                                    projectSearchResults[
+                                        projectSearchResultsIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
@@ -228,7 +223,7 @@ class _ProjectSelectionPageWidgetState
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedProjectId =
-                                            testItem.desc!;
+                                            projectSearchResultsItem.desc!;
                                       });
 
                                       context.pushNamed(
@@ -257,7 +252,8 @@ class _ProjectSelectionPageWidgetState
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: Text(
-                                                  testItem.desc!,
+                                                  projectSearchResultsItem
+                                                      .desc!,
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)

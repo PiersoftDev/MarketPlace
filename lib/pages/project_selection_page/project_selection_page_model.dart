@@ -14,9 +14,7 @@ class ProjectSelectionPageModel extends FlutterFlowModel {
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // Algolia Search Results from action on TextField
-  List<MpProjectsRecord>? algoliaSearchResults1 = [];
-  // Algolia Search Results from action on IconButton
-  List<MpProjectsRecord>? algoliaSearchResults2 = [];
+  List<MpProjectsRecord>? algoliaSearchResults = [];
 
   /// Initialization and disposal methods.
 
