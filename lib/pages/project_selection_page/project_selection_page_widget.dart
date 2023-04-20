@@ -99,6 +99,21 @@ class _ProjectSelectionPageWidgetState
                                           Duration(milliseconds: 100),
                                           () => setState(() {}),
                                         ),
+                                        onFieldSubmitted: (_) async {
+                                          setState(() => _model
+                                              .algoliaSearchResults = null);
+                                          await MpProjectsRecord.search(
+                                            term: _model
+                                                .itemSearchTextFieldController
+                                                .text,
+                                          )
+                                              .then((r) => _model
+                                                  .algoliaSearchResults = r)
+                                              .onError((_, __) => _model
+                                                  .algoliaSearchResults = [])
+                                              .whenComplete(
+                                                  () => setState(() {}));
+                                        },
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -164,32 +179,6 @@ class _ProjectSelectionPageWidgetState
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 10.0, 0.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        setState(() =>
-                                            _model.algoliaSearchResults = null);
-                                        await MpProjectsRecord.search(
-                                          term: _model
-                                              .itemSearchTextFieldController
-                                              .text,
-                                        )
-                                            .then((r) =>
-                                                _model.algoliaSearchResults = r)
-                                            .onError((_, __) => _model
-                                                .algoliaSearchResults = [])
-                                            .whenComplete(
-                                                () => setState(() {}));
-                                      },
-                                      child: Icon(
-                                        Icons.search,
-                                        color: Colors.black,
-                                        size: 24.0,
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -240,6 +229,10 @@ class _ProjectSelectionPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
                                   child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedProjectId =

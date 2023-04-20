@@ -398,6 +398,10 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 10.0, 0.0),
                                       child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
                                         onTap: () async {
                                           setState(() => _model
                                               .algoliaSearchResults = null);
@@ -472,6 +476,10 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
                                   child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedItemId =

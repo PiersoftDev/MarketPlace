@@ -126,6 +126,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'OrderSubmitSuccess',
           path: '/orderSubmitSuccess',
           builder: (context, params) => OrderSubmitSuccessWidget(),
+        ),
+        FFRoute(
+          name: 'NewDashboard',
+          path: '/newDashboard',
+          builder: (context, params) => NewDashboardWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
