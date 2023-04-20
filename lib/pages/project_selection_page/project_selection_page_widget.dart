@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -61,87 +62,117 @@ class _ProjectSelectionPageWidgetState
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
-                      child: TextFormField(
-                        controller: _model.textController,
-                        onChanged: (_) => EasyDebounce.debounce(
-                          '_model.textController',
-                          Duration(milliseconds: 100),
-                          () async {
-                            setState(() => _model.algoliaSearchResults = null);
-                            await MpProjectsRecord.search(
-                              term: _model.textController.text,
-                            )
-                                .then((r) => _model.algoliaSearchResults = r)
-                                .onError(
-                                    (_, __) => _model.algoliaSearchResults = [])
-                                .whenComplete(() => setState(() {}));
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 10.0),
+                            child: TextFormField(
+                              controller: _model.textController,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                '_model.textController',
+                                Duration(milliseconds: 100),
+                                () async {
+                                  setState(
+                                      () => _model.algoliaSearchResults = null);
+                                  await MpProjectsRecord.search(
+                                    term: _model.textController.text,
+                                  )
+                                      .then((r) =>
+                                          _model.algoliaSearchResults = r)
+                                      .onError((_, __) =>
+                                          _model.algoliaSearchResults = [])
+                                      .whenComplete(() => setState(() {}));
+                                },
+                              ),
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                hintText: 'Pick a Project',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 10.0, 10.0),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              validator: _model.textControllerValidator
+                                  .asValidator(context),
+                            ),
+                          ),
+                        ),
+                        FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 60.0,
+                          icon: Icon(
+                            Icons.close,
+                            color: FlutterFlowTheme.of(context).error,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              _model.textController?.clear();
+                            });
                           },
                         ),
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'Pick a Project',
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.normal,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          errorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedErrorBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1.0,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 10.0, 10.0, 10.0),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
-                            ),
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding:
