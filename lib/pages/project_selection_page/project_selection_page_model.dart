@@ -9,11 +9,10 @@ import 'package:provider/provider.dart';
 class ProjectSelectionPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController;
-  String? Function(BuildContext, String?)?
-      itemSearchTextFieldControllerValidator;
-  // Algolia Search Results from action on ItemSearchTextField
+  // State field(s) for TextField widget.
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
+  // Algolia Search Results from action on TextField
   List<MpProjectsRecord>? algoliaSearchResults = [];
 
   /// Initialization and disposal methods.
@@ -21,7 +20,7 @@ class ProjectSelectionPageModel extends FlutterFlowModel {
   void initState(BuildContext context) {}
 
   void dispose() {
-    itemSearchTextFieldController?.dispose();
+    textController?.dispose();
   }
 
   /// Additional helper methods are added here.
