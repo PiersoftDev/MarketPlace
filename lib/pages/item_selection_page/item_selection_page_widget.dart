@@ -188,7 +188,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                   Expanded(
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 2.0, 2.0, 2.0),
+                                          8.0, 8.0, 2.0, 2.0),
                                       child: TextFormField(
                                         controller: _model.textController,
                                         onChanged: (_) => EasyDebounce.debounce(
