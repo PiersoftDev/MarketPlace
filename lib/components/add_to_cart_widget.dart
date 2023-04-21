@@ -48,6 +48,12 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(0.0),
+          bottomRight: Radius.circular(0.0),
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
       ),
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 24.0),
