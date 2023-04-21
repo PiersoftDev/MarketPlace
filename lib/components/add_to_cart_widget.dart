@@ -55,33 +55,56 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                child: Text(
-                  'Add To Cart',
-                  style: FlutterFlowTheme.of(context).headlineSmall,
+              Align(
+                alignment: AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                  child: Text(
+                    'Item Details',
+                    style: FlutterFlowTheme.of(context).headlineSmall,
+                  ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                child: Text(
-                  'Item Code:  ${FFAppState().selectedItemId}',
-                  style: FlutterFlowTheme.of(context).bodyMedium,
-                ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    child: Text(
+                      'Activity: ${FFAppState().selectedActivityName}',
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    child: Text(
+                      'Item Code:  ${FFAppState().selectedItemId}',
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Quantity:',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      'Qty:',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 20.0,
+                          ),
                     ),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 0.0, 200.0, 0.0),
+                            10.0, 0.0, 30.0, 0.0),
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.05,
                           child: TextFormField(
@@ -125,24 +148,19 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
                     Text(
-                      'Unit Of Measurement: ',
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      'UOM: ',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 20.0,
+                          ),
                     ),
                     Expanded(
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 100.0, 0.0),
+                            10.0, 0.0, 30.0, 0.0),
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.1,
+                          width: MediaQuery.of(context).size.width * 0.05,
                           child: TextFormField(
                             controller: _model.textController2,
                             obscureText: false,
@@ -190,7 +208,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       Navigator.pop(context);
