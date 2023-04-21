@@ -83,6 +83,7 @@ class _ProjectActivitySelectionPageWidgetState
                             child: TextFormField(
                               controller: _model.textController,
                               autofocus: true,
+                              readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(
                                 hintText: FFAppState().selectedProjectName,
