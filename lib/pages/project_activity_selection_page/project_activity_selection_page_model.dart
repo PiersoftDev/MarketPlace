@@ -1,33 +1,27 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ProjectActivitySelectionPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController1;
-  String? Function(BuildContext, String?)?
-      itemSearchTextFieldController1Validator;
-  // State field(s) for ItemSearchTextField widget.
-  TextEditingController? itemSearchTextFieldController2;
-  String? Function(BuildContext, String?)?
-      itemSearchTextFieldController2Validator;
-  // Algolia Search Results from action on Icon
+  // Algolia Search Results from action on ProjectActivitySelectionPage
   List<ProjectActivityRecord>? algoliaSearchResults = [];
+  // State field(s) for ChoiceChips widget.
+  String? choiceChipsValue;
+  FormFieldController<List<String>>? choiceChipsValueController;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
-  void dispose() {
-    itemSearchTextFieldController1?.dispose();
-    itemSearchTextFieldController2?.dispose();
-  }
+  void dispose() {}
 
   /// Additional helper methods are added here.
 

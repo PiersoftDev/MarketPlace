@@ -1,8 +1,10 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'project_activity_selection_page_model.dart';
@@ -28,9 +30,16 @@ class _ProjectActivitySelectionPageWidgetState
     super.initState();
     _model = createModel(context, () => ProjectActivitySelectionPageModel());
 
-    _model.itemSearchTextFieldController1 ??=
-        TextEditingController(text: FFAppState().selectedProjectId);
-    _model.itemSearchTextFieldController2 ??= TextEditingController();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() => _model.algoliaSearchResults = null);
+      await ProjectActivityRecord.search(
+        term: FFAppState().selectedProjectId,
+      )
+          .then((r) => _model.algoliaSearchResults = r)
+          .onError((_, __) => _model.algoliaSearchResults = [])
+          .whenComplete(() => setState(() {}));
+    });
   }
 
   @override
@@ -67,341 +76,45 @@ class _ProjectActivitySelectionPageWidgetState
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: Container(
-                        width: double.infinity,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context).success,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 30.0, 0.0),
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .itemSearchTextFieldController1,
-                                                  onChanged: (_) =>
-                                                      EasyDebounce.debounce(
-                                                    '_model.itemSearchTextFieldController1',
-                                                    Duration(milliseconds: 100),
-                                                    () => setState(() {}),
-                                                  ),
-                                                  autofocus: true,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        'Pick an activity',
-                                                    hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodySmall,
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10.0,
-                                                                10.0,
-                                                                10.0,
-                                                                10.0),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                  textAlign: TextAlign.start,
-                                                  validator: _model
-                                                      .itemSearchTextFieldController1Validator
-                                                      .asValidator(context),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                        child: FlutterFlowChoiceChips(
+                          options: [ChipData('')],
+                          onChanged: (val) => setState(
+                              () => _model.choiceChipsValue = val?.first),
+                          selectedChipStyle: ChipStyle(
+                            backgroundColor: Color(0xFFE3E7ED),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                            iconColor: Colors.white,
+                            iconSize: 18.0,
+                            elevation: 4.0,
+                          ),
+                          unselectedChipStyle: ChipStyle(
+                            backgroundColor: Colors.white,
+                            textStyle:
+                                FlutterFlowTheme.of(context).bodySmall.override(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFFE3E7ED),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 30.0, 0.0),
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .itemSearchTextFieldController2,
-                                                  onChanged: (_) =>
-                                                      EasyDebounce.debounce(
-                                                    '_model.itemSearchTextFieldController2',
-                                                    Duration(milliseconds: 100),
-                                                    () => setState(() {}),
-                                                  ),
-                                                  autofocus: true,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    hintText:
-                                                        'Pick an activity',
-                                                    hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodySmall,
-                                                    enabledBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    errorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Color(0x00000000),
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                4.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                4.0),
-                                                      ),
-                                                    ),
-                                                    contentPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10.0,
-                                                                10.0,
-                                                                10.0,
-                                                                10.0),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                  textAlign: TextAlign.start,
-                                                  validator: _model
-                                                      .itemSearchTextFieldController2Validator
-                                                      .asValidator(context),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 10.0, 0.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  setState(() => _model
-                                                          .algoliaSearchResults =
-                                                      null);
-                                                  await ProjectActivityRecord
-                                                          .search(
-                                                    term: _model
-                                                        .itemSearchTextFieldController2
-                                                        .text,
-                                                  )
-                                                      .then((r) => _model
-                                                              .algoliaSearchResults =
-                                                          r)
-                                                      .onError((_, __) => _model
-                                                              .algoliaSearchResults =
-                                                          [])
-                                                      .whenComplete(() =>
-                                                          setState(() {}));
-                                                },
-                                                child: Icon(
-                                                  Icons.search,
-                                                  color: Colors.black,
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            iconColor: Color(0xFFE3E7ED),
+                            iconSize: 18.0,
+                            elevation: 4.0,
+                          ),
+                          chipSpacing: 20.0,
+                          multiselect: false,
+                          initialized: _model.choiceChipsValue != null,
+                          alignment: WrapAlignment.start,
+                          controller: _model.choiceChipsValueController ??=
+                              FormFieldController<List<String>>(
+                            [FFAppState().selectedProjectName],
+                          ),
                         ),
                       ),
                     ),
@@ -431,15 +144,18 @@ class _ProjectActivitySelectionPageWidgetState
                                 ),
                               );
                             }
-                            final test =
+                            final projectActivityResults =
                                 _model.algoliaSearchResults?.toList() ?? [];
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              itemCount: test.length,
-                              itemBuilder: (context, testIndex) {
-                                final testItem = test[testIndex];
+                              itemCount: projectActivityResults.length,
+                              itemBuilder:
+                                  (context, projectActivityResultsIndex) {
+                                final projectActivityResultsItem =
+                                    projectActivityResults[
+                                        projectActivityResultsIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
@@ -451,7 +167,7 @@ class _ProjectActivitySelectionPageWidgetState
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedActivityId =
-                                            testItem.desc!;
+                                            projectActivityResultsItem.desc!;
                                       });
 
                                       context.pushNamed('ItemSelectionPage');
@@ -479,7 +195,8 @@ class _ProjectActivitySelectionPageWidgetState
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: Text(
-                                                  testItem.desc!,
+                                                  projectActivityResultsItem
+                                                      .desc!,
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)

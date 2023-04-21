@@ -221,6 +221,8 @@ class _ProjectSelectionPageWidgetState
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedProjectId =
+                                            projectSearchResultsItem.id!;
+                                        FFAppState().selectedProjectName =
                                             projectSearchResultsItem.desc!;
                                       });
 
