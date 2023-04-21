@@ -1,8 +1,7 @@
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_choice_chips.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,6 +39,8 @@ class _ProjectActivitySelectionPageWidgetState
           .onError((_, __) => _model.algoliaSearchResults = [])
           .whenComplete(() => setState(() {}));
     });
+
+    _model.textController ??= TextEditingController();
   }
 
   @override
@@ -72,51 +73,99 @@ class _ProjectActivitySelectionPageWidgetState
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).success,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: FlutterFlowChoiceChips(
-                          options: [ChipData('')],
-                          onChanged: (val) => setState(
-                              () => _model.choiceChipsValue = val?.first),
-                          selectedChipStyle: ChipStyle(
-                            backgroundColor: Color(0xFFE3E7ED),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white,
-                                ),
-                            iconColor: Colors.white,
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          unselectedChipStyle: ChipStyle(
-                            backgroundColor: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).bodySmall.override(
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 10.0, 10.0, 10.0),
+                            child: TextFormField(
+                              controller: _model.textController,
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                hintText: FFAppState().selectedProjectName,
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
                                       fontFamily: 'Poppins',
-                                      color: Color(0xFFE3E7ED),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                      fontStyle: FontStyle.italic,
                                     ),
-                            iconColor: Color(0xFFE3E7ED),
-                            iconSize: 18.0,
-                            elevation: 4.0,
-                          ),
-                          chipSpacing: 20.0,
-                          multiselect: false,
-                          initialized: _model.choiceChipsValue != null,
-                          alignment: WrapAlignment.start,
-                          controller: _model.choiceChipsValueController ??=
-                              FormFieldController<List<String>>(
-                            [FFAppState().selectedProjectName],
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedErrorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 10.0, 10.0, 10.0),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                              validator: _model.textControllerValidator
+                                  .asValidator(context),
+                            ),
                           ),
                         ),
-                      ),
+                        FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 60.0,
+                          icon: Icon(
+                            Icons.close,
+                            color: FlutterFlowTheme.of(context).alternate,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            context.pushNamed('ProjectSelectionPage');
+                          },
+                        ),
+                      ],
                     ),
                     Padding(
                       padding:
