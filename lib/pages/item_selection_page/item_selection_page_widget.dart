@@ -234,7 +234,9 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
                                               width: 1.0,
                                             ),
                                             borderRadius:
