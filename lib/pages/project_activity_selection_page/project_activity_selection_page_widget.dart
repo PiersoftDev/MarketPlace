@@ -218,8 +218,7 @@ class _ProjectActivitySelectionPageWidgetState
                                       setState(() {
                                         FFAppState().selectedActivityId =
                                             projectActivityResultsItem.id!;
-                                        FFAppState().selectedActivityName =
-                                            projectActivityResultsItem.desc!;
+                                        FFAppState().selectedActivityName = '';
                                       });
 
                                       context.pushNamed('ItemSelectionPage');
