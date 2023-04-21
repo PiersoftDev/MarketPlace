@@ -99,10 +99,19 @@ class _ProjectActivitySelectionPageWidgetState
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     5.0, 5.0, 5.0, 5.0),
-                                child: Icon(
-                                  Icons.close,
-                                  color: Colors.black,
-                                  size: 20.0,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed('ProjectSelectionPage');
+                                  },
+                                  child: Icon(
+                                    Icons.close,
+                                    color: Colors.black,
+                                    size: 20.0,
+                                  ),
                                 ),
                               ),
                             ],

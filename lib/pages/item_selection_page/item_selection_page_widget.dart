@@ -30,8 +30,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
     super.initState();
     _model = createModel(context, () => ItemSelectionPageModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textController2 ??= TextEditingController();
+    _model.textController ??= TextEditingController();
   }
 
   @override
@@ -97,10 +96,20 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 5.0),
-                                    child: Icon(
-                                      Icons.close,
-                                      color: Colors.black,
-                                      size: 20.0,
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context
+                                            .pushNamed('ProjectSelectionPage');
+                                      },
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.black,
+                                        size: 20.0,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -138,10 +147,20 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5.0, 5.0, 5.0, 5.0),
-                                    child: Icon(
-                                      Icons.close,
-                                      color: Colors.black,
-                                      size: 20.0,
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                            'ProjectActivitySelectionPage');
+                                      },
+                                      child: Icon(
+                                        Icons.close,
+                                        color: Colors.black,
+                                        size: 20.0,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -157,112 +176,15 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 10.0, 10.0, 10.0),
                                 child: TextFormField(
-                                  controller: _model.textController1,
-                                  autofocus: true,
-                                  readOnly: true,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    hintText: FFAppState().selectedActivityName,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.normal,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .alternate,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    focusedErrorBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 10.0, 10.0),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                  validator: _model.textController1Validator
-                                      .asValidator(context),
-                                ),
-                              ),
-                            ),
-                            FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 60.0,
-                              icon: Icon(
-                                Icons.close,
-                                color: FlutterFlowTheme.of(context).alternate,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                context
-                                    .pushNamed('ProjectActivitySelectionPage');
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 10.0),
-                                child: TextFormField(
-                                  controller: _model.textController2,
+                                  controller: _model.textController,
                                   onChanged: (_) => EasyDebounce.debounce(
-                                    '_model.textController2',
+                                    '_model.textController',
                                     Duration(milliseconds: 100),
                                     () async {
                                       setState(() =>
                                           _model.algoliaSearchResults = null);
                                       await ItemsRecord.search(
-                                        term: _model.textController2.text,
+                                        term: _model.textController.text,
                                       )
                                           .then((r) =>
                                               _model.algoliaSearchResults = r)
@@ -336,7 +258,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.w500,
                                       ),
-                                  validator: _model.textController2Validator
+                                  validator: _model.textControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
