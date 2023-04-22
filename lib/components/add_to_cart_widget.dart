@@ -295,8 +295,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           expectedDate: _model.datePicked?.toString(),
                           orderId: FFAppState().orderId,
                           projectName: FFAppState().selectedProjectName,
-                          activityName: FFAppState().selectedProjectName,
                           itemDesc: FFAppState().selectedItemName,
+                          activityName: FFAppState().selectedActivityName,
                         ),
                         'createdDate': FieldValue.serverTimestamp(),
                       };
