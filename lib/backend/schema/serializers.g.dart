@@ -12,10 +12,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(MaterialItemStruct.serializer)
       ..add(MpProjectsRecord.serializer)
       ..add(ProjectActivityRecord.serializer)
-      ..add(UsersRecord.serializer)
-      ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(MaterialItemStruct)]),
-          () => new ListBuilder<MaterialItemStruct>()))
+      ..add(UsersRecord.serializer))
     .build();
 
 // ignore_for_file: deprecated_member_use_from_same_package,type=lint

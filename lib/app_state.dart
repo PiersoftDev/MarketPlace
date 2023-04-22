@@ -31,30 +31,6 @@ class FFAppState extends ChangeNotifier {
     _selectedItemId = _value;
   }
 
-  List<DocumentReference> _itemsList = [];
-  List<DocumentReference> get itemsList => _itemsList;
-  set itemsList(List<DocumentReference> _value) {
-    _itemsList = _value;
-  }
-
-  void addToItemsList(DocumentReference _value) {
-    _itemsList.add(_value);
-  }
-
-  void removeFromItemsList(DocumentReference _value) {
-    _itemsList.remove(_value);
-  }
-
-  void removeAtIndexFromItemsList(int _index) {
-    _itemsList.removeAt(_index);
-  }
-
-  DocumentReference? _selectedItemDetails;
-  DocumentReference? get selectedItemDetails => _selectedItemDetails;
-  set selectedItemDetails(DocumentReference? _value) {
-    _selectedItemDetails = _value;
-  }
-
   String _selectedProjectId = '';
   String get selectedProjectId => _selectedProjectId;
   set selectedProjectId(String _value) {
@@ -77,6 +53,12 @@ class FFAppState extends ChangeNotifier {
   String get selectedActivityName => _selectedActivityName;
   set selectedActivityName(String _value) {
     _selectedActivityName = _value;
+  }
+
+  String _orderId = '';
+  String get orderId => _orderId;
+  set orderId(String _value) {
+    _orderId = _value;
   }
 }
 

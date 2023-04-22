@@ -15,7 +15,31 @@ abstract class MaterialIndentRecord
 
   String? get activityId;
 
-  BuiltList<MaterialItemStruct>? get items;
+  String? get itemId;
+
+  int? get quantity;
+
+  String? get uom;
+
+  DateTime? get createdDate;
+
+  String? get createdBy;
+
+  String? get status;
+
+  String? get approvedBy;
+
+  DateTime? get approvedDateTime;
+
+  String? get expectedDate;
+
+  String? get orderId;
+
+  String? get projectName;
+
+  String? get activityName;
+
+  String? get itemDesc;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -24,7 +48,17 @@ abstract class MaterialIndentRecord
   static void _initializeBuilder(MaterialIndentRecordBuilder builder) => builder
     ..projectId = ''
     ..activityId = ''
-    ..items = ListBuilder();
+    ..itemId = ''
+    ..quantity = 0
+    ..uom = ''
+    ..createdBy = ''
+    ..status = ''
+    ..approvedBy = ''
+    ..expectedDate = ''
+    ..orderId = ''
+    ..projectName = ''
+    ..activityName = ''
+    ..itemDesc = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('material_indent');
@@ -51,6 +85,19 @@ abstract class MaterialIndentRecord
 Map<String, dynamic> createMaterialIndentRecordData({
   String? projectId,
   String? activityId,
+  String? itemId,
+  int? quantity,
+  String? uom,
+  DateTime? createdDate,
+  String? createdBy,
+  String? status,
+  String? approvedBy,
+  DateTime? approvedDateTime,
+  String? expectedDate,
+  String? orderId,
+  String? projectName,
+  String? activityName,
+  String? itemDesc,
 }) {
   final firestoreData = serializers.toFirestore(
     MaterialIndentRecord.serializer,
@@ -58,7 +105,19 @@ Map<String, dynamic> createMaterialIndentRecordData({
       (m) => m
         ..projectId = projectId
         ..activityId = activityId
-        ..items = null,
+        ..itemId = itemId
+        ..quantity = quantity
+        ..uom = uom
+        ..createdDate = createdDate
+        ..createdBy = createdBy
+        ..status = status
+        ..approvedBy = approvedBy
+        ..approvedDateTime = approvedDateTime
+        ..expectedDate = expectedDate
+        ..orderId = orderId
+        ..projectName = projectName
+        ..activityName = activityName
+        ..itemDesc = itemDesc,
     ),
   );
 

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -347,6 +348,29 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     0.0, 10.0, 0.0, 0.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    setState(() {
+                                      FFAppState().orderId =
+                                          '${'${random_data.randomString(
+                                        5,
+                                        6,
+                                        true,
+                                        true,
+                                        true,
+                                      )}-${random_data.randomString(
+                                        5,
+                                        6,
+                                        true,
+                                        true,
+                                        true,
+                                      )}-${random_data.randomString(
+                                        5,
+                                        6,
+                                        true,
+                                        true,
+                                        false,
+                                      )}'}';
+                                    });
+
                                     context.pushNamed('ProjectSelectionPage');
                                   },
                                   text: 'Make a list now',
