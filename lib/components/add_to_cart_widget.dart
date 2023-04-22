@@ -94,62 +94,62 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
                           'Expected Date : ',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            _model.datePicked?.toString(),
-                            '2023-01-01',
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              _model.datePicked?.toString(),
+                              '2023-01-01',
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 0.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            final _datePickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: getCurrentTimestamp,
-                              firstDate: getCurrentTimestamp,
-                              lastDate: DateTime(2050),
-                            );
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              30.0, 0.0, 0.0, 0.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              final _datePickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: getCurrentTimestamp,
+                                firstDate: getCurrentTimestamp,
+                                lastDate: DateTime(2050),
+                              );
 
-                            if (_datePickedDate != null) {
-                              setState(() {
-                                _model.datePicked = DateTime(
-                                  _datePickedDate.year,
-                                  _datePickedDate.month,
-                                  _datePickedDate.day,
-                                );
-                              });
-                            }
-                          },
-                          child: Icon(
-                            Icons.calendar_today,
-                            color: Colors.black,
-                            size: 24.0,
+                              if (_datePickedDate != null) {
+                                setState(() {
+                                  _model.datePicked = DateTime(
+                                    _datePickedDate.year,
+                                    _datePickedDate.month,
+                                    _datePickedDate.day,
+                                  );
+                                });
+                              }
+                            },
+                            child: Icon(
+                              Icons.calendar_today,
+                              color: Colors.black,
+                              size: 24.0,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
