@@ -182,15 +182,15 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('Dashboard');
+                          context.pushNamed('PhoneSignIn');
                         },
-                        text: 'Start Shopping',
+                        text: 'Explore',
                         icon: Icon(
                           Icons.shopping_cart,
                           size: 15.0,
                         ),
                         options: FFButtonOptions(
-                          width: 250.0,
+                          width: 200.0,
                           height: 50.0,
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
