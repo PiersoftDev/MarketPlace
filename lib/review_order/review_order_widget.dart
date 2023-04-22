@@ -97,22 +97,6 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 0.0, 0.0),
-                                child: Text(
-                                  'Activity  : ${FFAppState().selectedActivityId}',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 18.0,
-                                      ),
-                                ),
-                              ),
-                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
@@ -133,8 +117,12 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: StreamBuilder<List<MpProjectsRecord>>(
-                                stream: queryMpProjectsRecord(),
+                              child: FutureBuilder<List<MaterialIndentRecord>>(
+                                future: queryMaterialIndentRecordOnce(
+                                  queryBuilder: (materialIndentRecord) =>
+                                      materialIndentRecord.where('orderId',
+                                          isEqualTo: FFAppState().orderId),
+                                ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -145,8 +133,8 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                       ),
                                     );
                                   }
-                                  List<MpProjectsRecord>
-                                      dataTableMpProjectsRecordList =
+                                  List<MaterialIndentRecord>
+                                      dataTableMaterialIndentRecordList =
                                       snapshot.data!;
                                   return DataTable2(
                                     columns: [
@@ -201,13 +189,31 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                           ),
                                         ),
                                       ),
+                                      DataColumn2(
+                                        label: DefaultTextStyle.merge(
+                                          softWrap: true,
+                                          child: Text(
+                                            'Activity',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineSmall
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 18.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
-                                    rows: dataTableMpProjectsRecordList
+                                    rows: dataTableMaterialIndentRecordList
                                         .mapIndexed((dataTableIndex,
-                                                dataTableMpProjectsRecord) =>
+                                                dataTableMaterialIndentRecord) =>
                                             [
                                               Text(
-                                                'steel',
+                                                dataTableMaterialIndentRecord
+                                                    .itemDesc!,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -219,7 +225,9 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                '10',
+                                                dataTableMaterialIndentRecord
+                                                    .quantity!
+                                                    .toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
@@ -231,7 +239,21 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                'MT',
+                                                dataTableMaterialIndentRecord
+                                                    .uom!,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                              ),
+                                              Text(
+                                                dataTableMaterialIndentRecord
+                                                    .activityName!,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
