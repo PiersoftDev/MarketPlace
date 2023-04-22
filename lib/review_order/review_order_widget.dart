@@ -141,7 +141,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                     scrollDirection: Axis.horizontal,
                                     child: Container(
                                       width: MediaQuery.of(context).size.width *
-                                          1.0,
+                                          2.0,
                                       child: DataTable2(
                                         columns: [
                                           DataColumn2(
