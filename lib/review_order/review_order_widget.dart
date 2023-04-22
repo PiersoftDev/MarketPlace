@@ -148,7 +148,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                             label: DefaultTextStyle.merge(
                                               softWrap: true,
                                               child: Text(
-                                                'Item Desc',
+                                                'Activity',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall
@@ -166,7 +166,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                             label: DefaultTextStyle.merge(
                                               softWrap: true,
                                               child: Text(
-                                                'Qty',
+                                                'Item',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall
@@ -184,7 +184,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                             label: DefaultTextStyle.merge(
                                               softWrap: true,
                                               child: Text(
-                                                'UOM',
+                                                'Quantity',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall
@@ -202,7 +202,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                             label: DefaultTextStyle.merge(
                                               softWrap: true,
                                               child: AutoSizeText(
-                                                'Activity',
+                                                'UOM',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .headlineSmall
@@ -223,7 +223,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                 [
                                                   AutoSizeText(
                                                     dataTableMaterialIndentRecord
-                                                        .itemDesc!,
+                                                        .activityName!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -235,6 +235,19 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                         ),
                                                   ),
                                                   Text(
+                                                    dataTableMaterialIndentRecord
+                                                        .itemDesc!,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
+                                                  ),
+                                                  AutoSizeText(
                                                     dataTableMaterialIndentRecord
                                                         .quantity!
                                                         .toString(),
@@ -251,19 +264,6 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                   AutoSizeText(
                                                     dataTableMaterialIndentRecord
                                                         .uom!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                        ),
-                                                  ),
-                                                  AutoSizeText(
-                                                    dataTableMaterialIndentRecord
-                                                        .activityName!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
