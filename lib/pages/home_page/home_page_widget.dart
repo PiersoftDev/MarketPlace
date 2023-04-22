@@ -182,7 +182,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          context.pushNamed('PhoneSignIn');
+                          context.pushNamed('Dashboard');
                         },
                         text: 'Explore',
                         icon: Icon(
