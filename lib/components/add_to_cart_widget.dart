@@ -1,8 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -280,6 +283,26 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
+                      final materialIndentCreateData = {
+                        ...createMaterialIndentRecordData(
+                          projectId: FFAppState().selectedProjectId,
+                          activityId: FFAppState().selectedActivityId,
+                          itemId: FFAppState().selectedItemId,
+                          quantity: int.tryParse(_model.textController.text),
+                          uom: _model.dropDownValue,
+                          createdBy: currentUserUid,
+                          status: 'Draft',
+                          expectedDate: _model.datePicked?.toString(),
+                          orderId: FFAppState().orderId,
+                          projectName: FFAppState().selectedProjectName,
+                          activityName: FFAppState().selectedProjectName,
+                          itemDesc: FFAppState().selectedItemName,
+                        ),
+                        'createdDate': FieldValue.serverTimestamp(),
+                      };
+                      await MaterialIndentRecord.collection
+                          .doc()
+                          .set(materialIndentCreateData);
                       Navigator.pop(context);
                     },
                     text: 'Add To Cart',

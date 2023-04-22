@@ -314,6 +314,8 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                       setState(() {
                                         FFAppState().selectedItemId =
                                             itemSearchItem.id!;
+                                        FFAppState().selectedItemName =
+                                            itemSearchItem.desc!;
                                       });
                                       await showModalBottomSheet(
                                         isScrollControlled: true,

@@ -60,6 +60,12 @@ class FFAppState extends ChangeNotifier {
   set orderId(String _value) {
     _orderId = _value;
   }
+
+  String _selectedItemName = '';
+  String get selectedItemName => _selectedItemName;
+  set selectedItemName(String _value) {
+    _selectedItemName = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
