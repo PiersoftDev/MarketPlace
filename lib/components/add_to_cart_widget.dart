@@ -97,9 +97,13 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        'Expected Date : ',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          'Expected Date : ',
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        ),
                       ),
                       Padding(
                         padding:
