@@ -1,7 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:easy_debounce/easy_debounce.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -84,43 +84,6 @@ class _ProjectSelectionPageWidgetState
                                       8.0, 0.0, 0.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.textController',
-                                      Duration(milliseconds: 2000),
-                                      () async {
-                                        _model.projectSearchResponse =
-                                            await MasterDataManagementAPIGroup
-                                                .searchProjectUsingGETCall
-                                                .call(
-                                          projectName:
-                                              _model.textController.text,
-                                        );
-                                        if (!(_model.projectSearchResponse
-                                                ?.succeeded ??
-                                            true)) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Failed to load project data, Please contact administrator',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 3000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                        }
-
-                                        setState(() {});
-                                      },
-                                    ),
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -183,85 +146,128 @@ class _ProjectSelectionPageWidgetState
                           ],
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Builder(
-                          builder: (context) {
-                            final projectSearchResults = getJsonField(
-                              (_model.projectSearchResponse?.jsonBody ?? ''),
-                              r'''$[*]''',
-                            ).toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: projectSearchResults.length,
-                              itemBuilder:
-                                  (context, projectSearchResultsIndex) {
-                                final projectSearchResultsItem =
-                                    projectSearchResults[
-                                        projectSearchResultsIndex];
-                                return Padding(
+                        child: FutureBuilder<ApiCallResponse>(
+                          future: (_model.apiRequestCompleter ??=
+                                  Completer<ApiCallResponse>()
+                                    ..complete(MasterDataManagementAPIGroup
+                                        .searchProjectUsingGETCall
+                                        .call(
+                                      projectName: _model.textController.text,
+                                    )))
+                              .future,
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 10.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      setState(() {
-                                        FFAppState().selectedProjectId =
-                                            getJsonField(
-                                          projectSearchResultsItem,
-                                          r'''$.lnId''',
-                                        ).toString();
-                                        FFAppState().selectedProjectName =
-                                            getJsonField(
-                                          projectSearchResultsItem,
-                                          r'''$.projectName''',
-                                        ).toString();
-                                      });
-
-                                      context.pushNamed(
-                                          'ProjectActivitySelectionPage');
-                                    },
-                                    child: Container(
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  -1.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 10.0),
-                                                child: Text(
+                                      20.0, 20.0, 20.0, 20.0),
+                                  child: LinearProgressIndicator(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                  ),
+                                ),
+                              );
+                            }
+                            final listViewSearchProjectUsingGETResponse =
+                                snapshot.data!;
+                            return Builder(
+                              builder: (context) {
+                                final projectSearchResults = getJsonField(
+                                  listViewSearchProjectUsingGETResponse
+                                      .jsonBody,
+                                  r'''$[*]''',
+                                ).toList();
+                                return RefreshIndicator(
+                                  onRefresh: () async {
+                                    setState(() =>
+                                        _model.apiRequestCompleter = null);
+                                    await _model.waitForApiRequestCompleted();
+                                  },
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: projectSearchResults.length,
+                                    itemBuilder:
+                                        (context, projectSearchResultsIndex) {
+                                      final projectSearchResultsItem =
+                                          projectSearchResults[
+                                              projectSearchResultsIndex];
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 10.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              FFAppState().selectedProjectId =
                                                   getJsonField(
-                                                    projectSearchResultsItem,
-                                                    r'''$.projectName''',
-                                                  ).toString(),
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                ),
+                                                projectSearchResultsItem,
+                                                r'''$.lnId''',
+                                              ).toString();
+                                              FFAppState().selectedProjectName =
+                                                  getJsonField(
+                                                projectSearchResultsItem,
+                                                r'''$.projectName''',
+                                              ).toString();
+                                            });
+
+                                            context.pushNamed(
+                                                'ProjectActivitySelectionPage');
+                                          },
+                                          child: Container(
+                                            width: 100.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: Color(0xFFC23F3F),
                                               ),
                                             ),
-                                          ],
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -1.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  10.0,
+                                                                  10.0,
+                                                                  10.0),
+                                                      child: Text(
+                                                        getJsonField(
+                                                          projectSearchResultsItem,
+                                                          r'''$.projectName''',
+                                                        ).toString(),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   ),
                                 );
                               },
