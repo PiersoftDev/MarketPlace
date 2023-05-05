@@ -252,7 +252,7 @@ class _ProjectSelectionPageWidgetState
                                                         getJsonField(
                                                           listViewHttpvmastersprojectssearchProjectjResponse
                                                               .jsonBody,
-                                                          r'''$.projectName''',
+                                                          r'''$[*].projectName''',
                                                         ).toString(),
                                                         textAlign:
                                                             TextAlign.start,
