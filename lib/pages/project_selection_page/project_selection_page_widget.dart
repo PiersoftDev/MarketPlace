@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -84,6 +85,16 @@ class _ProjectSelectionPageWidgetState
                                       8.0, 0.0, 0.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController',
+                                      Duration(milliseconds: 1000),
+                                      () async {
+                                        setState(() =>
+                                            _model.apiRequestCompleter = null);
+                                        await _model
+                                            .waitForApiRequestCompleted();
+                                      },
+                                    ),
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -147,11 +158,12 @@ class _ProjectSelectionPageWidgetState
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: FutureBuilder<ApiCallResponse>(
-                          future: (_model.apiRequestCompleter ??=
-                                  Completer<ApiCallResponse>()
-                                    ..complete(
-                                        HttpvmastersprojectssearchProjectjCall
-                                            .call()))
+                          future: (_model.apiRequestCompleter ??= Completer<
+                                  ApiCallResponse>()
+                                ..complete(
+                                    HttpvmastersprojectssearchProjectjCall.call(
+                                  projectName: _model.textController.text,
+                                )))
                               .future,
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.

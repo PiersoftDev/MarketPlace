@@ -46,25 +46,24 @@ class SearchProjectUsingGETCall {
 /// End Master data management API Group Code
 
 class HttpvmastersprojectssearchProjectjCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String? projectName = '',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'httpvmastersprojectssearchProjectj',
-      apiUrl: 'http://13.232.221.196:8080/v1/masters/projects/searchProject/j',
+      apiUrl:
+          'http://13.232.221.196:8080/v1/masters/projects/searchProject/${projectName}',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'projectName': projectName,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
     );
   }
-
-  static dynamic projectNames(dynamic response) => getJsonField(
-        response,
-        r'''$[:].projectName''',
-        true,
-      );
 }
 
 class ApiPagingParams {
