@@ -189,6 +189,11 @@ class _ProjectSelectionPageWidgetState
                                       .jsonBody,
                                   r'''$[*]''',
                                 ).toList();
+                                if (projects.isEmpty) {
+                                  return Image.asset(
+                                    'assets/images/Rectanglebag.png',
+                                  );
+                                }
                                 return RefreshIndicator(
                                   onRefresh: () async {
                                     setState(() =>
