@@ -59,6 +59,12 @@ class HttpvmastersprojectssearchProjectjCall {
       cache: false,
     );
   }
+
+  static dynamic projectNames(dynamic response) => getJsonField(
+        response,
+        r'''$[:].projectName''',
+        true,
+      );
 }
 
 class ApiPagingParams {
