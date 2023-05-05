@@ -184,11 +184,10 @@ class _ProjectSelectionPageWidgetState
                                 snapshot.data!;
                             return Builder(
                               builder: (context) {
-                                final projects = getJsonField(
-                                  listViewSearchProjectUsingGETResponse
-                                      .jsonBody,
-                                  r'''$[*]''',
-                                ).toList();
+                                final projects =
+                                    listViewSearchProjectUsingGETResponse
+                                        .jsonBody
+                                        .toList();
                                 if (projects.isEmpty) {
                                   return Image.asset(
                                     'assets/images/Rectanglebag.png',
@@ -264,7 +263,7 @@ class _ProjectSelectionPageWidgetState
                                                       child: Text(
                                                         getJsonField(
                                                           projectsItem,
-                                                          r'''$.projectName''',
+                                                          r'''$[*].projectName''',
                                                         ).toString(),
                                                         textAlign:
                                                             TextAlign.start,
