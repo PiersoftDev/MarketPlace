@@ -45,6 +45,22 @@ class SearchProjectUsingGETCall {
 
 /// End Master data management API Group Code
 
+class HttpvmastersprojectssearchProjectjCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'httpvmastersprojectssearchProjectj',
+      apiUrl: 'http://13.232.221.196:8080/v1/masters/projects/searchProject/j',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

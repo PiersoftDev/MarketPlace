@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -85,16 +84,6 @@ class _ProjectSelectionPageWidgetState
                                       8.0, 0.0, 0.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.textController',
-                                      Duration(milliseconds: 2000),
-                                      () async {
-                                        setState(() =>
-                                            _model.apiRequestCompleter = null);
-                                        await _model
-                                            .waitForApiRequestCompleted();
-                                      },
-                                    ),
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -160,11 +149,9 @@ class _ProjectSelectionPageWidgetState
                         child: FutureBuilder<ApiCallResponse>(
                           future: (_model.apiRequestCompleter ??=
                                   Completer<ApiCallResponse>()
-                                    ..complete(MasterDataManagementAPIGroup
-                                        .searchProjectUsingGETCall
-                                        .call(
-                                      projectName: _model.textController.text,
-                                    )))
+                                    ..complete(
+                                        HttpvmastersprojectssearchProjectjCall
+                                            .call()))
                               .future,
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -180,12 +167,12 @@ class _ProjectSelectionPageWidgetState
                                 ),
                               );
                             }
-                            final listViewSearchProjectUsingGETResponse =
+                            final listViewHttpvmastersprojectssearchProjectjResponse =
                                 snapshot.data!;
                             return Builder(
                               builder: (context) {
                                 final projects = getJsonField(
-                                  listViewSearchProjectUsingGETResponse
+                                  listViewHttpvmastersprojectssearchProjectjResponse
                                       .jsonBody,
                                   r'''$[*]''',
                                 ).toList();
@@ -263,7 +250,8 @@ class _ProjectSelectionPageWidgetState
                                                                   10.0),
                                                       child: Text(
                                                         getJsonField(
-                                                          projectsItem,
+                                                          listViewHttpvmastersprojectssearchProjectjResponse
+                                                              .jsonBody,
                                                           r'''$.projectName''',
                                                         ).toString(),
                                                         textAlign:
