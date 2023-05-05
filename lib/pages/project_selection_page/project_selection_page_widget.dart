@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -84,6 +85,16 @@ class _ProjectSelectionPageWidgetState
                                       8.0, 0.0, 0.0, 0.0),
                                   child: TextFormField(
                                     controller: _model.textController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      '_model.textController',
+                                      Duration(milliseconds: 2000),
+                                      () async {
+                                        setState(() =>
+                                            _model.apiRequestCompleter = null);
+                                        await _model
+                                            .waitForApiRequestCompleted();
+                                      },
+                                    ),
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -173,7 +184,7 @@ class _ProjectSelectionPageWidgetState
                                 snapshot.data!;
                             return Builder(
                               builder: (context) {
-                                final projectSearchResults = getJsonField(
+                                final projects = getJsonField(
                                   listViewSearchProjectUsingGETResponse
                                       .jsonBody,
                                   r'''$[*]''',
@@ -188,12 +199,10 @@ class _ProjectSelectionPageWidgetState
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    itemCount: projectSearchResults.length,
-                                    itemBuilder:
-                                        (context, projectSearchResultsIndex) {
-                                      final projectSearchResultsItem =
-                                          projectSearchResults[
-                                              projectSearchResultsIndex];
+                                    itemCount: projects.length,
+                                    itemBuilder: (context, projectsIndex) {
+                                      final projectsItem =
+                                          projects[projectsIndex];
                                       return Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 10.0, 10.0, 10.0),
@@ -206,12 +215,12 @@ class _ProjectSelectionPageWidgetState
                                             setState(() {
                                               FFAppState().selectedProjectId =
                                                   getJsonField(
-                                                projectSearchResultsItem,
+                                                projectsItem,
                                                 r'''$.lnId''',
                                               ).toString();
                                               FFAppState().selectedProjectName =
                                                   getJsonField(
-                                                projectSearchResultsItem,
+                                                projectsItem,
                                                 r'''$.projectName''',
                                               ).toString();
                                             });
@@ -249,7 +258,7 @@ class _ProjectSelectionPageWidgetState
                                                                   10.0),
                                                       child: Text(
                                                         getJsonField(
-                                                          projectSearchResultsItem,
+                                                          projectsItem,
                                                           r'''$.projectName''',
                                                         ).toString(),
                                                         textAlign:
