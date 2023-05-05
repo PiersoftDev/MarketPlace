@@ -171,13 +171,11 @@ class _ProjectSelectionPageWidgetState
                                 snapshot.data!;
                             return Builder(
                               builder: (context) {
-                                final projects =
-                                    HttpvmastersprojectssearchProjectjCall
-                                            .projectNames(
-                                          listViewHttpvmastersprojectssearchProjectjResponse
-                                              .jsonBody,
-                                        )?.toList() ??
-                                        [];
+                                final projects = getJsonField(
+                                  listViewHttpvmastersprojectssearchProjectjResponse
+                                      .jsonBody,
+                                  r'''$[*]''',
+                                ).toList();
                                 if (projects.isEmpty) {
                                   return Image.asset(
                                     'assets/images/Rectanglebag.png',
@@ -252,9 +250,8 @@ class _ProjectSelectionPageWidgetState
                                                                   10.0),
                                                       child: Text(
                                                         getJsonField(
-                                                          listViewHttpvmastersprojectssearchProjectjResponse
-                                                              .jsonBody,
-                                                          r'''$''',
+                                                          projectsItem,
+                                                          r'''$.projectName''',
                                                         ).toString(),
                                                         textAlign:
                                                             TextAlign.start,
