@@ -1,4 +1,4 @@
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -88,17 +88,37 @@ class _ProjectSelectionPageWidgetState
                                       '_model.textController',
                                       Duration(milliseconds: 2000),
                                       () async {
-                                        setState(() =>
-                                            _model.algoliaSearchResults = null);
-                                        await MpProjectsRecord.search(
-                                          term: _model.textController.text,
-                                        )
-                                            .then((r) =>
-                                                _model.algoliaSearchResults = r)
-                                            .onError((_, __) => _model
-                                                .algoliaSearchResults = [])
-                                            .whenComplete(
-                                                () => setState(() {}));
+                                        _model.projectSearchResponse =
+                                            await MasterDataManagementAPIGroup
+                                                .searchProjectUsingGETCall
+                                                .call(
+                                          projectName:
+                                              _model.textController.text,
+                                        );
+                                        if (!(_model.projectSearchResponse
+                                                ?.succeeded ??
+                                            true)) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Failed to load project data, Please contact administrator',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 3000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        }
+
+                                        setState(() {});
                                       },
                                     ),
                                     autofocus: true,
@@ -165,15 +185,9 @@ class _ProjectSelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults == null) {
-                              return Center(
-                                child: LinearProgressIndicator(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                              );
-                            }
                             final projectSearchResults =
-                                _model.algoliaSearchResults?.toList() ?? [];
+                                (_model.projectSearchResponse?.jsonBody ?? '')
+                                    .toList();
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -195,9 +209,15 @@ class _ProjectSelectionPageWidgetState
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedProjectId =
-                                            projectSearchResultsItem.id!;
+                                            getJsonField(
+                                          projectSearchResultsItem,
+                                          r'''$.lnId''',
+                                        ).toString();
                                         FFAppState().selectedProjectName =
-                                            projectSearchResultsItem.desc!;
+                                            getJsonField(
+                                          projectSearchResultsItem,
+                                          r'''$.projectName''',
+                                        ).toString();
                                       });
 
                                       context.pushNamed(
@@ -226,8 +246,10 @@ class _ProjectSelectionPageWidgetState
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: Text(
-                                                  projectSearchResultsItem
-                                                      .desc!,
+                                                  getJsonField(
+                                                    projectSearchResultsItem,
+                                                    r'''$.projectName''',
+                                                  ).toString(),
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)

@@ -1,4 +1,4 @@
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -12,8 +12,8 @@ class ProjectSelectionPageModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  // Algolia Search Results from action on TextField
-  List<MpProjectsRecord>? algoliaSearchResults = [];
+  // Stores action output result for [Backend Call - API (searchProjectUsingGET)] action in TextField widget.
+  ApiCallResponse? projectSearchResponse;
 
   /// Initialization and disposal methods.
 

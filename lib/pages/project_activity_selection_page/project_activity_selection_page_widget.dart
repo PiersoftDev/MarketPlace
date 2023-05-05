@@ -33,6 +33,7 @@ class _ProjectActivitySelectionPageWidgetState
       setState(() => _model.algoliaSearchResults = null);
       await ProjectActivityRecord.search(
         term: FFAppState().selectedProjectId,
+        useCache: true,
       )
           .then((r) => _model.algoliaSearchResults = r)
           .onError((_, __) => _model.algoliaSearchResults = [])

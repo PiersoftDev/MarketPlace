@@ -57,11 +57,13 @@ abstract class ProjectActivityRecord
           ..ffRef = ProjectActivityRecord.collection.doc(snapshot.objectID),
       );
 
-  static Future<List<ProjectActivityRecord>> search(
-          {String? term,
-          FutureOr<LatLng>? location,
-          int? maxResults,
-          double? searchRadiusMeters}) =>
+  static Future<List<ProjectActivityRecord>> search({
+    String? term,
+    FutureOr<LatLng>? location,
+    int? maxResults,
+    double? searchRadiusMeters,
+    bool useCache = false,
+  }) =>
       FFAlgoliaManager.instance
           .algoliaQuery(
             index: 'project-activity',
@@ -69,6 +71,7 @@ abstract class ProjectActivityRecord
             maxResults: maxResults,
             location: location,
             searchRadiusMeters: searchRadiusMeters,
+            useCache: useCache,
           )
           .then((r) => r.map(fromAlgolia).toList());
 

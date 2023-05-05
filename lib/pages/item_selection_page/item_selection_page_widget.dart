@@ -207,6 +207,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                                 .algoliaSearchResults = null);
                                             await ItemsRecord.search(
                                               term: _model.textController.text,
+                                              useCache: true,
                                             )
                                                 .then((r) => _model
                                                     .algoliaSearchResults = r)
