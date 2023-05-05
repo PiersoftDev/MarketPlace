@@ -13,7 +13,9 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class MasterDataManagementAPIGroup {
   static String baseUrl = 'http://13.232.221.196:8080';
-  static Map<String, String> headers = {};
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
   static SearchProjectUsingGETCall searchProjectUsingGETCall =
       SearchProjectUsingGETCall();
 }
