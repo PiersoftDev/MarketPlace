@@ -185,9 +185,10 @@ class _ProjectSelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            final projectSearchResults =
-                                (_model.projectSearchResponse?.jsonBody ?? '')
-                                    .toList();
+                            final projectSearchResults = getJsonField(
+                              (_model.projectSearchResponse?.jsonBody ?? ''),
+                              r'''$[*]''',
+                            ).toList();
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
