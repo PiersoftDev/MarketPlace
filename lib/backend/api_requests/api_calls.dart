@@ -79,6 +79,67 @@ class ItemSelectionCall {
   }
 }
 
+class SaveMaterialIndentCall {
+  static Future<ApiCallResponse> call({
+    String? orderId = '',
+    String? itemId = '',
+    String? itemDesc = '',
+    String? categoryId = '',
+    String? category = '',
+    double? quantity,
+    String? uom = '',
+    String? plannedDate = '',
+    String? projectId = '',
+    String? projectDesc = '',
+    String? activityId = '',
+    String? activityDesc = '',
+    String? createdDate = '',
+    String? userId = '',
+    String? username = '',
+  }) {
+    final body = '''
+{
+  "orderId": "${orderId}",
+  "itemId": "${itemId}",
+  "itemDesc": "${itemDesc}",
+  "categoryId": "${categoryId}",
+  "category": "${category}",
+  "quantity": ${quantity},
+  "uom": "${uom}",
+  "plannedDate": "${plannedDate}",
+  "projectId": "${projectId}",
+  "projectDesc": "${projectDesc}",
+  "activityId": "${activityId}",
+  "activityDesc": "${activityDesc}",
+  "createdDate": "${createdDate}",
+  "budgetedQty": 0,
+  "inventory": 0,
+  "procuredTillDate": 0,
+  "userId": "${userId}",
+  "username": "${username}",
+  "cmp": 0,
+  "variance": 0,
+  "status": "DRAFT"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'saveMaterialIndent',
+      apiUrl:
+          'http://13.232.221.196:8081/v1/purchase/material-indent/add-material',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

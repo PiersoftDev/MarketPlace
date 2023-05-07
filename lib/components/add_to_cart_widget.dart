@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -252,8 +253,69 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      _model.saveMaterialIndent =
+                          await SaveMaterialIndentCall.call(
+                        orderId: FFAppState().orderId,
+                        itemId: getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.lnId''',
+                        ).toString(),
+                        itemDesc: getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.itemDesc''',
+                        ).toString(),
+                        categoryId: getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.itemGroupCode''',
+                        ).toString(),
+                        category: getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.itemGroupDesc''',
+                        ).toString(),
+                        quantity: double.tryParse(_model.textController.text),
+                        uom: getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.uomCode''',
+                        ).toString(),
+                        plannedDate: _model.datePicked?.toString(),
+                        projectId: getJsonField(
+                          FFAppState().selectedProject,
+                          r'''$.lnId''',
+                        ).toString(),
+                        projectDesc: getJsonField(
+                          FFAppState().selectedProject,
+                          r'''$.projectName''',
+                        ).toString(),
+                        activityId: getJsonField(
+                          FFAppState().selectedActivity,
+                          r'''$.lnId''',
+                        ).toString(),
+                        activityDesc: getJsonField(
+                          FFAppState().selectedActivity,
+                          r'''$.activityDesc''',
+                        ).toString(),
+                        createdDate: getCurrentTimestamp.toString(),
+                        userId: 'userId',
+                        username: 'Sample User',
+                      );
+                      if (!(_model.saveMaterialIndent?.succeeded ?? true)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Successfully added line',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      }
+
+                      setState(() {});
                     },
                     text: 'Add To Cart',
                     options: FFButtonOptions(
