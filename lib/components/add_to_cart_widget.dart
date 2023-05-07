@@ -231,7 +231,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                       child: Text(
                         getJsonField(
                           FFAppState().selectedItem,
-                          r'''$.uom''',
+                          r'''$.uomCode''',
                         ).toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
