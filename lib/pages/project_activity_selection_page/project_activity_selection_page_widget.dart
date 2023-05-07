@@ -82,7 +82,10 @@ class _ProjectActivitySelectionPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 5.0),
                                   child: Text(
-                                    FFAppState().selectedProjectName,
+                                    getJsonField(
+                                      FFAppState().selectedProject,
+                                      r'''$.projectName''',
+                                    ).toString(),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   ),

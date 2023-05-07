@@ -237,6 +237,8 @@ class _ProjectSelectionPageWidgetState
                                                   projectsItem,
                                                   r'''$.projectCode''',
                                                 ).toString();
+                                                FFAppState().selectedProject =
+                                                    projectsItem;
                                               });
 
                                               context.pushNamed(

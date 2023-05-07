@@ -3,6 +3,7 @@ import 'backend/backend.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
+import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
@@ -66,6 +67,12 @@ class FFAppState extends ChangeNotifier {
   String get selectedProjectCode => _selectedProjectCode;
   set selectedProjectCode(String _value) {
     _selectedProjectCode = _value;
+  }
+
+  dynamic _selectedProject;
+  dynamic get selectedProject => _selectedProject;
+  set selectedProject(dynamic _value) {
+    _selectedProject = _value;
   }
 }
 

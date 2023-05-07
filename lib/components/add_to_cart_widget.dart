@@ -104,7 +104,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'Expected Date : ',
+                          'Planned Date : ',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                         Padding(
@@ -188,28 +188,28 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                               decoration: InputDecoration(
                                 hintStyle:
                                     FlutterFlowTheme.of(context).bodySmall,
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0xFFC23F3F),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0xFFC23F3F),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                errorBorder: OutlineInputBorder(
+                                errorBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                focusedErrorBorder: OutlineInputBorder(
+                                focusedErrorBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
                                     width: 1.0,
