@@ -57,6 +57,28 @@ class SearchActivityByProjectCodeCall {
   }
 }
 
+class ItemSelectionCall {
+  static Future<ApiCallResponse> call({
+    String? itemDesc = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'itemSelection',
+      apiUrl: 'http://13.232.221.196:8080/v1/masters/items/list/${itemDesc}',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'itemDesc': itemDesc,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -266,126 +267,166 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.65,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4.0,
-                              color: Color(0x33000000),
-                              offset: Offset(0.0, 2.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Builder(
-                          builder: (context) {
-                            if (_model.algoliaSearchResults == null) {
-                              return Center(
-                                child: LinearProgressIndicator(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                              );
-                            }
-                            final itemSearch =
-                                _model.algoliaSearchResults?.toList() ?? [];
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: itemSearch.length,
-                              itemBuilder: (context, itemSearchIndex) {
-                                final itemSearchItem =
-                                    itemSearch[itemSearchIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 10.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      setState(() {
-                                        FFAppState().selectedItemId =
-                                            itemSearchItem.id!;
-                                        FFAppState().selectedItemName =
-                                            itemSearchItem.desc!;
-                                      });
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        enableDrag: false,
-                                        context: context,
-                                        builder: (bottomSheetContext) {
-                                          return GestureDetector(
-                                            onTap: () => FocusScope.of(context)
-                                                .requestFocus(_unfocusNode),
-                                            child: Padding(
-                                              padding: MediaQuery.of(
-                                                      bottomSheetContext)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.6,
-                                                child: AddToCartWidget(),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => setState(() {}));
-                                    },
-                                    child: Container(
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  -1.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 10.0),
-                                                child: Text(
-                                                  itemSearchItem.desc!,
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                    if (_model.textController.text != null &&
+                        _model.textController.text != '')
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x33000000),
+                                offset: Offset(0.0, 2.0),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: ItemSelectionCall.call(
+                              itemDesc: _model.textController.text,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20.0, 20.0, 20.0, 20.0),
+                                    child: LinearProgressIndicator(
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
                                     ),
                                   ),
                                 );
-                              },
-                            );
-                          },
+                              }
+                              final listViewItemSelectionResponse =
+                                  snapshot.data!;
+                              return Builder(
+                                builder: (context) {
+                                  final itemSearch = getJsonField(
+                                    listViewItemSelectionResponse.jsonBody,
+                                    r'''$[*]''',
+                                  ).toList();
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: itemSearch.length,
+                                    itemBuilder: (context, itemSearchIndex) {
+                                      final itemSearchItem =
+                                          itemSearch[itemSearchIndex];
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10.0, 10.0, 10.0, 10.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              FFAppState().selectedItemId =
+                                                  getJsonField(
+                                                itemSearchItem,
+                                                r'''$.itemCode''',
+                                              ).toString();
+                                              FFAppState().selectedItemName =
+                                                  getJsonField(
+                                                itemSearchItem,
+                                                r'''$.itemCode''',
+                                              ).toString();
+                                            });
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (bottomSheetContext) {
+                                                return GestureDetector(
+                                                  onTap: () =>
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              _unfocusNode),
+                                                  child: Padding(
+                                                    padding: MediaQuery.of(
+                                                            bottomSheetContext)
+                                                        .viewInsets,
+                                                    child: Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.6,
+                                                      child: AddToCartWidget(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+                                          },
+                                          child: Container(
+                                            width: 100.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                              border: Border.all(
+                                                color: Color(0xFFC23F3F),
+                                              ),
+                                            ),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -1.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  10.0,
+                                                                  10.0,
+                                                                  10.0),
+                                                      child: Text(
+                                                        getJsonField(
+                                                          itemSearchItem,
+                                                          r'''$.itemDesc''',
+                                                        ).toString(),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
