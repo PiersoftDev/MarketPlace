@@ -1,8 +1,6 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -83,8 +81,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                         EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                     child: Text(
                       'Activity: ${getJsonField(
-                        FFAppState().selectedProject,
-                        r'''$.projectName''',
+                        FFAppState().selectedActivity,
+                        r'''$.activityDesc''',
                       ).toString()}',
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
@@ -94,8 +92,8 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                         EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                     child: Text(
                       'Item Code:  ${getJsonField(
-                        FFAppState().selectedActivity,
-                        r'''$.activityDesc''',
+                        FFAppState().selectedItem,
+                        r'''$.itemDesc''',
                       ).toString()}',
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
@@ -184,7 +182,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 30.0, 0.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.05,
+                            width: MediaQuery.of(context).size.width * 0.03,
                             child: TextFormField(
                               controller: _model.textController,
                               obscureText: false,
@@ -231,50 +229,14 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                     Align(
                       alignment: AlignmentDirectional(0.0, -0.1),
                       child: Text(
-                        'UOM: ',
+                        getJsonField(
+                          FFAppState().selectedItem,
+                          r'''$.uom''',
+                        ).toString(),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
                               fontSize: 20.0,
                             ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: 20.0,
-                        height: 35.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        child: FlutterFlowDropDown<String>(
-                          controller: _model.dropDownValueController ??=
-                              FormFieldController<String>(null),
-                          options: ['MT', 'LTs', '\nKGs'],
-                          onChanged: (val) =>
-                              setState(() => _model.dropDownValue = val),
-                          width: 180.0,
-                          height: 50.0,
-                          searchHintTextStyle: FlutterFlowTheme.of(context)
-                              .bodyLarge
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                              ),
-                          textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                          hintText: 'Please select...',
-                          searchHintText: 'Search for an item...',
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          elevation: 2.0,
-                          borderColor: FlutterFlowTheme.of(context).alternate,
-                          borderWidth: 0.0,
-                          borderRadius: 8.0,
-                          margin: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 4.0, 12.0, 4.0),
-                          hidesUnderline: true,
-                          isSearchable: false,
-                        ),
                       ),
                     ),
                   ],
