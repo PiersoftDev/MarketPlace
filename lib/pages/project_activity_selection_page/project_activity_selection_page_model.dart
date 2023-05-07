@@ -1,4 +1,4 @@
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 class ProjectActivitySelectionPageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // Algolia Search Results from action on ProjectActivitySelectionPage
-  List<ProjectActivityRecord>? algoliaSearchResults = [];
+  // Stores action output result for [Backend Call - API (searchActivityByProjectCode)] action in ProjectActivitySelectionPage widget.
+  ApiCallResponse? activityResult;
 
   /// Initialization and disposal methods.
 

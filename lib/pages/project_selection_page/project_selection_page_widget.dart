@@ -163,8 +163,7 @@ class _ProjectSelectionPageWidgetState
                             future: (_model.apiRequestCompleter ??=
                                     Completer<ApiCallResponse>()
                                       ..complete(
-                                          HttpvmastersprojectssearchProjectjCall
-                                              .call(
+                                          SearchProjectByProjectNameCall.call(
                                         projectName: _model.textController.text,
                                       )))
                                 .future,
@@ -182,12 +181,12 @@ class _ProjectSelectionPageWidgetState
                                   ),
                                 );
                               }
-                              final listViewHttpvmastersprojectssearchProjectjResponse =
+                              final listViewSearchProjectByProjectNameResponse =
                                   snapshot.data!;
                               return Builder(
                                 builder: (context) {
                                   final projects = getJsonField(
-                                    listViewHttpvmastersprojectssearchProjectjResponse
+                                    listViewSearchProjectByProjectNameResponse
                                         .jsonBody,
                                     r'''$[*]''',
                                   ).toList();
@@ -231,6 +230,12 @@ class _ProjectSelectionPageWidgetState
                                                     getJsonField(
                                                   projectsItem,
                                                   r'''$.projectName''',
+                                                ).toString();
+                                                FFAppState()
+                                                        .selectedProjectCode =
+                                                    getJsonField(
+                                                  projectsItem,
+                                                  r'''$.projectCode''',
                                                 ).toString();
                                               });
 

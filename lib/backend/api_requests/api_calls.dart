@@ -9,48 +9,12 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-/// Start Master data management API Group Code
-
-class MasterDataManagementAPIGroup {
-  static String baseUrl = 'http://13.232.221.196:8080';
-  static Map<String, String> headers = {
-    'Content-Type': 'application/json',
-  };
-  static SearchProjectUsingGETCall searchProjectUsingGETCall =
-      SearchProjectUsingGETCall();
-}
-
-class SearchProjectUsingGETCall {
-  Future<ApiCallResponse> call({
-    String? projectName = '',
-  }) {
-    return ApiManager.instance.makeApiCall(
-      callName: 'searchProjectUsingGET',
-      apiUrl:
-          '${MasterDataManagementAPIGroup.baseUrl}/v1/masters/projects/searchProject/${projectName}',
-      callType: ApiCallType.GET,
-      headers: {
-        ...MasterDataManagementAPIGroup.headers,
-      },
-      params: {
-        'projectName': projectName,
-      },
-      returnBody: false,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-    );
-  }
-}
-
-/// End Master data management API Group Code
-
-class HttpvmastersprojectssearchProjectjCall {
+class SearchProjectByProjectNameCall {
   static Future<ApiCallResponse> call({
     String? projectName = '',
   }) {
     return ApiManager.instance.makeApiCall(
-      callName: 'httpvmastersprojectssearchProjectj',
+      callName: 'searchProjectByProjectName',
       apiUrl:
           'http://13.232.221.196:8080/v1/masters/projects/searchProject/${projectName}',
       callType: ApiCallType.GET,
@@ -58,6 +22,33 @@ class HttpvmastersprojectssearchProjectjCall {
       params: {
         'projectName': projectName,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class SearchActivityByProjectCodeCall {
+  static Future<ApiCallResponse> call({
+    String? projectCode = '',
+  }) {
+    final body = '''
+{
+  "projectCode": "${projectCode}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchActivityByProjectCode',
+      apiUrl:
+          'http://13.232.221.196:8080/v1/masters/project-activities/searchProjectActivity',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

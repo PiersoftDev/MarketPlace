@@ -61,6 +61,12 @@ class FFAppState extends ChangeNotifier {
   set selectedItemName(String _value) {
     _selectedItemName = _value;
   }
+
+  String _selectedProjectCode = '';
+  String get selectedProjectCode => _selectedProjectCode;
+  set selectedProjectCode(String _value) {
+    _selectedProjectCode = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

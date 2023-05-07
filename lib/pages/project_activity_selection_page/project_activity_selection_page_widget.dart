@@ -1,4 +1,4 @@
-import '/backend/backend.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +30,23 @@ class _ProjectActivitySelectionPageWidgetState
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() => _model.algoliaSearchResults = null);
-      await ProjectActivityRecord.search(
-        term: FFAppState().selectedProjectId,
-        useCache: true,
-      )
-          .then((r) => _model.algoliaSearchResults = r)
-          .onError((_, __) => _model.algoliaSearchResults = [])
-          .whenComplete(() => setState(() {}));
+      _model.activityResult = await SearchActivityByProjectCodeCall.call(
+        projectCode: FFAppState().selectedProjectCode,
+      );
+      if (!(_model.activityResult?.succeeded ?? true)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Error fetching activities for selected project code',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).secondary,
+          ),
+        );
+      }
     });
   }
 
@@ -143,15 +152,10 @@ class _ProjectActivitySelectionPageWidgetState
                         ),
                         child: Builder(
                           builder: (context) {
-                            if (_model.algoliaSearchResults == null) {
-                              return Center(
-                                child: LinearProgressIndicator(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                ),
-                              );
-                            }
-                            final projectActivityResults =
-                                _model.algoliaSearchResults?.toList() ?? [];
+                            final projectActivityResults = getJsonField(
+                              (_model.activityResult?.jsonBody ?? ''),
+                              r'''$[*]''',
+                            ).toList();
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -173,9 +177,15 @@ class _ProjectActivitySelectionPageWidgetState
                                     onTap: () async {
                                       setState(() {
                                         FFAppState().selectedActivityId =
-                                            projectActivityResultsItem.id!;
+                                            getJsonField(
+                                          projectActivityResultsItem,
+                                          r'''$.activityCode''',
+                                        ).toString();
                                         FFAppState().selectedActivityName =
-                                            projectActivityResultsItem.desc!;
+                                            getJsonField(
+                                          projectActivityResultsItem,
+                                          r'''$.activityDesc''',
+                                        ).toString();
                                       });
 
                                       context.pushNamed('ItemSelectionPage');
@@ -203,8 +213,10 @@ class _ProjectActivitySelectionPageWidgetState
                                                     .fromSTEB(
                                                         10.0, 10.0, 10.0, 10.0),
                                                 child: Text(
-                                                  projectActivityResultsItem
-                                                      .desc!,
+                                                  getJsonField(
+                                                    projectActivityResultsItem,
+                                                    r'''$.activityDesc''',
+                                                  ).toString(),
                                                   textAlign: TextAlign.start,
                                                   style: FlutterFlowTheme.of(
                                                           context)
