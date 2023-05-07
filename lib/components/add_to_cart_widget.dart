@@ -172,8 +172,13 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                     ),
                     Expanded(
                       child: Container(
-                        width: 20.0,
                         height: 35.0,
+                        constraints: BoxConstraints(
+                          minWidth: 5.0,
+                          minHeight: 35.0,
+                          maxWidth: 15.0,
+                          maxHeight: 35.0,
+                        ),
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
