@@ -88,7 +88,10 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 10.0, 0.0, 0.0),
                                 child: Text(
-                                  'Project : ${FFAppState().selectedProjectName}',
+                                  'Project : ${getJsonField(
+                                    FFAppState().selectedProject,
+                                    r'''$.projectName''',
+                                  ).toString()}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

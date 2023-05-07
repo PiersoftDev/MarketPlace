@@ -220,23 +220,6 @@ class _ProjectSelectionPageWidgetState
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               setState(() {
-                                                FFAppState().selectedProjectId =
-                                                    getJsonField(
-                                                  projectsItem,
-                                                  r'''$.lnId''',
-                                                ).toString();
-                                                FFAppState()
-                                                        .selectedProjectName =
-                                                    getJsonField(
-                                                  projectsItem,
-                                                  r'''$.projectName''',
-                                                ).toString();
-                                                FFAppState()
-                                                        .selectedProjectCode =
-                                                    getJsonField(
-                                                  projectsItem,
-                                                  r'''$.projectCode''',
-                                                ).toString();
                                                 FFAppState().selectedProject =
                                                     projectsItem;
                                               });

@@ -91,7 +91,10 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 5.0, 5.0, 5.0),
                                       child: Text(
-                                        FFAppState().selectedProjectName,
+                                        getJsonField(
+                                          FFAppState().selectedProject,
+                                          r'''$.projectName''',
+                                        ).toString(),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -145,7 +148,10 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           5.0, 5.0, 5.0, 5.0),
                                       child: Text(
-                                        FFAppState().selectedActivityName,
+                                        getJsonField(
+                                          FFAppState().selectedActivity,
+                                          r'''$.activityDesc''',
+                                        ).toString(),
                                         maxLines: 2,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
@@ -331,16 +337,8 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             setState(() {
-                                              FFAppState().selectedItemId =
-                                                  getJsonField(
-                                                itemSearchItem,
-                                                r'''$.itemCode''',
-                                              ).toString();
-                                              FFAppState().selectedItemName =
-                                                  getJsonField(
-                                                itemSearchItem,
-                                                r'''$.itemCode''',
-                                              ).toString();
+                                              FFAppState().selectedItem =
+                                                  itemSearchItem;
                                             });
                                             await showModalBottomSheet(
                                               isScrollControlled: true,

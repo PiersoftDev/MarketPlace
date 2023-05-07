@@ -133,7 +133,10 @@ class _ProjectActivitySelectionPageWidgetState
                         ),
                         child: FutureBuilder<ApiCallResponse>(
                           future: SearchActivityByProjectCodeCall.call(
-                            projectCode: FFAppState().selectedProjectCode,
+                            projectCode: getJsonField(
+                              FFAppState().selectedProject,
+                              r'''$.projectCode''',
+                            ).toString(),
                           ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
@@ -178,16 +181,8 @@ class _ProjectActivitySelectionPageWidgetState
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
                                           setState(() {
-                                            FFAppState().selectedActivityId =
-                                                getJsonField(
-                                              projectActivityResultsItem,
-                                              r'''$.activityCode''',
-                                            ).toString();
-                                            FFAppState().selectedActivityName =
-                                                getJsonField(
-                                              projectActivityResultsItem,
-                                              r'''$.activityDesc''',
-                                            ).toString();
+                                            FFAppState().selectedActivity =
+                                                projectActivityResultsItem;
                                           });
 
                                           context

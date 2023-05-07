@@ -21,58 +21,28 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _selectedItemId = '';
-  String get selectedItemId => _selectedItemId;
-  set selectedItemId(String _value) {
-    _selectedItemId = _value;
-  }
-
-  String _selectedProjectId = '';
-  String get selectedProjectId => _selectedProjectId;
-  set selectedProjectId(String _value) {
-    _selectedProjectId = _value;
-  }
-
-  String _selectedActivityId = '';
-  String get selectedActivityId => _selectedActivityId;
-  set selectedActivityId(String _value) {
-    _selectedActivityId = _value;
-  }
-
-  String _selectedProjectName = '';
-  String get selectedProjectName => _selectedProjectName;
-  set selectedProjectName(String _value) {
-    _selectedProjectName = _value;
-  }
-
-  String _selectedActivityName = '';
-  String get selectedActivityName => _selectedActivityName;
-  set selectedActivityName(String _value) {
-    _selectedActivityName = _value;
-  }
-
   String _orderId = '';
   String get orderId => _orderId;
   set orderId(String _value) {
     _orderId = _value;
   }
 
-  String _selectedItemName = '';
-  String get selectedItemName => _selectedItemName;
-  set selectedItemName(String _value) {
-    _selectedItemName = _value;
-  }
-
-  String _selectedProjectCode = '';
-  String get selectedProjectCode => _selectedProjectCode;
-  set selectedProjectCode(String _value) {
-    _selectedProjectCode = _value;
-  }
-
   dynamic _selectedProject;
   dynamic get selectedProject => _selectedProject;
   set selectedProject(dynamic _value) {
     _selectedProject = _value;
+  }
+
+  dynamic _selectedActivity;
+  dynamic get selectedActivity => _selectedActivity;
+  set selectedActivity(dynamic _value) {
+    _selectedActivity = _value;
+  }
+
+  dynamic _selectedItem;
+  dynamic get selectedItem => _selectedItem;
+  set selectedItem(dynamic _value) {
+    _selectedItem = _value;
   }
 }
 
