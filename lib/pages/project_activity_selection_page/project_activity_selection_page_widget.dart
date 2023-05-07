@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'project_activity_selection_page_model.dart';
@@ -27,27 +26,6 @@ class _ProjectActivitySelectionPageWidgetState
   void initState() {
     super.initState();
     _model = createModel(context, () => ProjectActivitySelectionPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.activityResult = await SearchActivityByProjectCodeCall.call(
-        projectCode: FFAppState().selectedProjectCode,
-      );
-      if (!(_model.activityResult?.succeeded ?? true)) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Error fetching activities for selected project code',
-              style: TextStyle(
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
-            ),
-            duration: Duration(milliseconds: 4000),
-            backgroundColor: FlutterFlowTheme.of(context).secondary,
-          ),
-        );
-      }
-    });
   }
 
   @override
@@ -150,85 +128,116 @@ class _ProjectActivitySelectionPageWidgetState
                           ],
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Builder(
-                          builder: (context) {
-                            final projectActivityResults = getJsonField(
-                              (_model.activityResult?.jsonBody ?? ''),
-                              r'''$[*]''',
-                            ).toList();
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: projectActivityResults.length,
-                              itemBuilder:
-                                  (context, projectActivityResultsIndex) {
-                                final projectActivityResultsItem =
-                                    projectActivityResults[
-                                        projectActivityResultsIndex];
-                                return Padding(
+                        child: FutureBuilder<ApiCallResponse>(
+                          future: SearchActivityByProjectCodeCall.call(
+                            projectCode: FFAppState().selectedProjectCode,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 10.0, 10.0, 10.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      setState(() {
-                                        FFAppState().selectedActivityId =
-                                            getJsonField(
-                                          projectActivityResultsItem,
-                                          r'''$.activityCode''',
-                                        ).toString();
-                                        FFAppState().selectedActivityName =
-                                            getJsonField(
-                                          projectActivityResultsItem,
-                                          r'''$.activityDesc''',
-                                        ).toString();
-                                      });
-
-                                      context.pushNamed('ItemSelectionPage');
-                                    },
-                                    child: Container(
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        border: Border.all(
-                                          color: Color(0xFFC23F3F),
-                                        ),
-                                      ),
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  -1.0, 0.0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 10.0, 10.0, 10.0),
-                                                child: Text(
-                                                  getJsonField(
-                                                    projectActivityResultsItem,
-                                                    r'''$.activityDesc''',
-                                                  ).toString(),
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                      20.0, 20.0, 20.0, 20.0),
+                                  child: LinearProgressIndicator(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
                                   ),
+                                ),
+                              );
+                            }
+                            final listViewSearchActivityByProjectCodeResponse =
+                                snapshot.data!;
+                            return Builder(
+                              builder: (context) {
+                                final projectActivityResults = getJsonField(
+                                  listViewSearchActivityByProjectCodeResponse
+                                      .jsonBody,
+                                  r'''$[*]''',
+                                ).toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: projectActivityResults.length,
+                                  itemBuilder:
+                                      (context, projectActivityResultsIndex) {
+                                    final projectActivityResultsItem =
+                                        projectActivityResults[
+                                            projectActivityResultsIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 10.0, 10.0, 10.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            FFAppState().selectedActivityId =
+                                                getJsonField(
+                                              projectActivityResultsItem,
+                                              r'''$.activityCode''',
+                                            ).toString();
+                                            FFAppState().selectedActivityName =
+                                                getJsonField(
+                                              projectActivityResultsItem,
+                                              r'''$.activityDesc''',
+                                            ).toString();
+                                          });
+
+                                          context
+                                              .pushNamed('ItemSelectionPage');
+                                        },
+                                        child: Container(
+                                          width: 100.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                            border: Border.all(
+                                              color: Color(0xFFC23F3F),
+                                            ),
+                                          ),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -1.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10.0,
+                                                                10.0,
+                                                                10.0,
+                                                                10.0),
+                                                    child: Text(
+                                                      getJsonField(
+                                                        projectActivityResultsItem,
+                                                        r'''$.activityDesc''',
+                                                      ).toString(),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             );
