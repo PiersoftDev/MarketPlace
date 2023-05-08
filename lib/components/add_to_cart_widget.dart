@@ -298,7 +298,9 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                         userId: 'userId',
                         username: 'Sample User',
                       );
-                      if (!(_model.saveMaterialIndent?.succeeded ?? true)) {
+                      if ((_model.saveMaterialIndent?.succeeded ?? true)) {
+                        Navigator.pop(context);
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
