@@ -140,6 +140,28 @@ class SaveMaterialIndentCall {
   }
 }
 
+class SubmitOrderCall {
+  static Future<ApiCallResponse> call({
+    String? orderId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'submitOrder',
+      apiUrl:
+          'http://13.232.221.196:8081/v1/purchase/material-indent/confirm/${orderId}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'oderId': orderId,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

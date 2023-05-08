@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -315,6 +316,10 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                           20.0, 20.0, 20.0, 20.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          await SubmitOrderCall.call(
+                            orderId: FFAppState().orderId,
+                          );
+
                           context.pushNamed('OrderSubmitSuccess');
 
                           await Future.delayed(
