@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -122,11 +121,9 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              child: FutureBuilder<List<MaterialIndentRecord>>(
-                                future: queryMaterialIndentRecordOnce(
-                                  queryBuilder: (materialIndentRecord) =>
-                                      materialIndentRecord.where('orderId',
-                                          isEqualTo: FFAppState().orderId),
+                              child: FutureBuilder<ApiCallResponse>(
+                                future: GetLinesByIdCall.call(
+                                  orderId: FFAppState().orderId,
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -138,23 +135,30 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                       ),
                                     );
                                   }
-                                  List<MaterialIndentRecord>
-                                      dataTableMaterialIndentRecordList =
+                                  final dataTableGetLinesByIdResponse =
                                       snapshot.data!;
-                                  return SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          2.0,
-                                      child: DataTable2(
-                                        columns: [
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Activity',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                  return Builder(
+                                    builder: (context) {
+                                      final orderLines = getJsonField(
+                                        dataTableGetLinesByIdResponse.jsonBody,
+                                        r'''$[*]''',
+                                      ).toList();
+                                      return SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2.0,
+                                          child: DataTable2(
+                                            columns: [
+                                              DataColumn2(
+                                                label: DefaultTextStyle.merge(
+                                                  softWrap: true,
+                                                  child: Text(
+                                                    'Activity',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .headlineSmall
                                                         .override(
                                                           fontFamily: 'Poppins',
@@ -163,16 +167,16 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                               .primaryText,
                                                           fontSize: 18.0,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Item',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              DataColumn2(
+                                                label: DefaultTextStyle.merge(
+                                                  softWrap: true,
+                                                  child: Text(
+                                                    'Item',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .headlineSmall
                                                         .override(
                                                           fontFamily: 'Poppins',
@@ -181,16 +185,16 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                               .primaryText,
                                                           fontSize: 18.0,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: Text(
-                                                'Quantity',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              DataColumn2(
+                                                label: DefaultTextStyle.merge(
+                                                  softWrap: true,
+                                                  child: Text(
+                                                    'Quantity',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .headlineSmall
                                                         .override(
                                                           fontFamily: 'Poppins',
@@ -199,110 +203,100 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                               .primaryText,
                                                           fontSize: 18.0,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
+                                            ],
+                                            rows: (orderLines as Iterable)
+                                                .mapIndexed((orderLinesIndex,
+                                                        orderLinesItem) =>
+                                                    [
+                                                      AutoSizeText(
+                                                        getJsonField(
+                                                          dataTableGetLinesByIdResponse
+                                                              .jsonBody,
+                                                          r'''$.activityDesc''',
+                                                        ).toString(),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        getJsonField(
+                                                          dataTableGetLinesByIdResponse
+                                                              .jsonBody,
+                                                          r'''$.itemDesc''',
+                                                        ).toString(),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                ),
+                                                      ),
+                                                      AutoSizeText(
+                                                        '${getJsonField(
+                                                          dataTableGetLinesByIdResponse
+                                                              .jsonBody,
+                                                          r'''$.quantity''',
+                                                        ).toString()} ${getJsonField(
+                                                          dataTableGetLinesByIdResponse
+                                                              .jsonBody,
+                                                          r'''$.uom''',
+                                                        ).toString()}',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                ),
+                                                      ),
+                                                    ]
+                                                        .map((c) => DataCell(c))
+                                                        .toList())
+                                                .map((e) => DataRow(cells: e))
+                                                .toList(),
+                                            headingRowColor:
+                                                MaterialStateProperty.all(
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
                                             ),
-                                          ),
-                                          DataColumn2(
-                                            label: DefaultTextStyle.merge(
-                                              softWrap: true,
-                                              child: AutoSizeText(
-                                                'UOM',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmall
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 18.0,
-                                                        ),
-                                              ),
+                                            headingRowHeight: 30.0,
+                                            dataRowColor:
+                                                MaterialStateProperty.all(
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                             ),
+                                            dataRowHeight: 40.0,
+                                            border: TableBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(0.0),
+                                            ),
+                                            dividerThickness: 1.0,
+                                            showBottomBorder: false,
+                                            minWidth: 49.0,
                                           ),
-                                        ],
-                                        rows: dataTableMaterialIndentRecordList
-                                            .mapIndexed((dataTableIndex,
-                                                    dataTableMaterialIndentRecord) =>
-                                                [
-                                                  AutoSizeText(
-                                                    dataTableMaterialIndentRecord
-                                                        .activityName!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    dataTableMaterialIndentRecord
-                                                        .itemDesc!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                        ),
-                                                  ),
-                                                  AutoSizeText(
-                                                    dataTableMaterialIndentRecord
-                                                        .quantity!
-                                                        .toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                        ),
-                                                  ),
-                                                  AutoSizeText(
-                                                    dataTableMaterialIndentRecord
-                                                        .uom!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                        ),
-                                                  ),
-                                                ]
-                                                    .map((c) => DataCell(c))
-                                                    .toList())
-                                            .map((e) => DataRow(cells: e))
-                                            .toList(),
-                                        headingRowColor:
-                                            MaterialStateProperty.all(
-                                          FlutterFlowTheme.of(context)
-                                              .primaryBackground,
                                         ),
-                                        headingRowHeight: 30.0,
-                                        dataRowColor: MaterialStateProperty.all(
-                                          FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        dataRowHeight: 40.0,
-                                        border: TableBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(0.0),
-                                        ),
-                                        dividerThickness: 1.0,
-                                        showBottomBorder: false,
-                                        minWidth: 49.0,
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   );
                                 },
                               ),

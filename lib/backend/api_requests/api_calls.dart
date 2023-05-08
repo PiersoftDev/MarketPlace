@@ -162,6 +162,27 @@ class SubmitOrderCall {
   }
 }
 
+class GetLinesByIdCall {
+  static Future<ApiCallResponse> call({
+    String? orderId = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getLinesById',
+      apiUrl:
+          'http://13.232.221.196:8081/v1/purchase/material-indent/${orderId}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'orderId': orderId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
