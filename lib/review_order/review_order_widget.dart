@@ -213,8 +213,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                     [
                                                       AutoSizeText(
                                                         getJsonField(
-                                                          dataTableGetLinesByIdResponse
-                                                              .jsonBody,
+                                                          orderLinesItem,
                                                           r'''$.activityDesc''',
                                                         ).toString(),
                                                         style:
@@ -231,8 +230,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                       ),
                                                       Text(
                                                         getJsonField(
-                                                          dataTableGetLinesByIdResponse
-                                                              .jsonBody,
+                                                          orderLinesItem,
                                                           r'''$.itemDesc''',
                                                         ).toString(),
                                                         style:
@@ -249,12 +247,10 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                                       ),
                                                       AutoSizeText(
                                                         '${getJsonField(
-                                                          dataTableGetLinesByIdResponse
-                                                              .jsonBody,
+                                                          orderLinesItem,
                                                           r'''$.quantity''',
                                                         ).toString()} ${getJsonField(
-                                                          dataTableGetLinesByIdResponse
-                                                              .jsonBody,
+                                                          orderLinesItem,
                                                           r'''$.uom''',
                                                         ).toString()}',
                                                         style:
