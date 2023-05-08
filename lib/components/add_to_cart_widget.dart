@@ -295,7 +295,6 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           FFAppState().selectedActivity,
                           r'''$.activityDesc''',
                         ).toString(),
-                        createdDate: getCurrentTimestamp.toString(),
                         userId: 'userId',
                         username: 'Sample User',
                       );
