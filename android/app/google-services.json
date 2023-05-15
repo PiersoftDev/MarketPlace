@@ -66,6 +66,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "800428311109-cd2sklqp02556f8rkvd8jl8959k8g3md.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kmv.kmvmarketplace",
+            "certificate_hash": "abe2a8d1be366c00087554c2d6c0ee604fce52b9"
+          }
+        },
+        {
           "client_id": "800428311109-jl3nb44i05ec23arps6tcgptqji9bmee.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
