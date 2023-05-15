@@ -70,57 +70,61 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         decoration: BoxDecoration(
                           color: Color(0xFFF5EFE6),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0.35, -0.05),
-                              child: Text(
-                                'Hello, Sai',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18.0,
-                                    ),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.35, -0.05),
+                                child: Text(
+                                  'Hello, Sai',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 18.0,
+                                      ),
+                                ),
                               ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      180.0, 0.0, 20.0, 0.0),
+                                  child: Icon(
+                                    Icons.calendar_today,
+                                    color: Color(0xFF1C3879),
+                                    size: 24.0,
+                                  ),
+                                ),
+                              ),
+                              Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    180.0, 0.0, 20.0, 0.0),
-                                child: Icon(
-                                  Icons.calendar_today,
-                                  color: Color(0xFF1C3879),
-                                  size: 24.0,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  GoRouter.of(context).prepareAuthEvent();
-                                  await authManager.signOut();
-                                  GoRouter.of(context).clearRedirectLocation();
+                                    0.0, 0.0, 10.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    GoRouter.of(context).prepareAuthEvent();
+                                    await authManager.signOut();
+                                    GoRouter.of(context)
+                                        .clearRedirectLocation();
 
-                                  context.goNamedAuth('HomePage', mounted);
-                                },
-                                child: Icon(
-                                  Icons.logout,
-                                  color: Color(0xFFB73232),
-                                  size: 24.0,
+                                    context.goNamedAuth('HomePage', mounted);
+                                  },
+                                  child: Icon(
+                                    Icons.logout,
+                                    color: Color(0xFFB73232),
+                                    size: 24.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
