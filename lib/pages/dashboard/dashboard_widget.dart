@@ -63,7 +63,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 50.0,
+                      height: MediaQuery.of(context).size.height * 0.05,
                       decoration: BoxDecoration(
                         color: Color(0xFFF5EFE6),
                       ),
