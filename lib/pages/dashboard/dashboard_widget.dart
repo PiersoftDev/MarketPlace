@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -117,7 +118,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     context.goNamedAuth('HomePage', mounted);
                                   },
                                   child: Icon(
-                                    Icons.logout,
+                                    Icons.settings_power,
                                     color: Color(0xFFB73232),
                                     size: 24.0,
                                   ),
@@ -428,10 +429,165 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     ),
                     Padding(
                       padding:
+                          EdgeInsetsDirectional.fromSTEB(5.0, 20.0, 5.0, 5.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEDF1D6),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                              child: FlutterFlowChoiceChips(
+                                options: [ChipData('Created', Icons.fiber_new)],
+                                onChanged: (val) => setState(() =>
+                                    _model.choiceChipsValue1 = val?.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent4,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                chipSpacing: 20.0,
+                                multiselect: false,
+                                alignment: WrapAlignment.start,
+                                controller:
+                                    _model.choiceChipsValueController1 ??=
+                                        FormFieldController<List<String>>(
+                                  [],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: FlutterFlowChoiceChips(
+                                options: [ChipData('Accepted', Icons.thumb_up)],
+                                onChanged: (val) => setState(() =>
+                                    _model.choiceChipsValue2 = val?.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).success,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent4,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                chipSpacing: 20.0,
+                                multiselect: false,
+                                alignment: WrapAlignment.start,
+                                controller:
+                                    _model.choiceChipsValueController2 ??=
+                                        FormFieldController<List<String>>(
+                                  [],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: FlutterFlowChoiceChips(
+                                options: [
+                                  ChipData(
+                                      'Rejected', Icons.thumb_down_alt_rounded)
+                                ],
+                                onChanged: (val) => setState(() =>
+                                    _model.choiceChipsValue3 = val?.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).error,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).accent4,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                        fontFamily: 'Poppins',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                  iconColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  iconSize: 18.0,
+                                  elevation: 4.0,
+                                ),
+                                chipSpacing: 20.0,
+                                multiselect: false,
+                                alignment: WrapAlignment.start,
+                                controller:
+                                    _model.choiceChipsValueController3 ??=
+                                        FormFieldController<List<String>>(
+                                  [],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
                           EdgeInsetsDirectional.fromSTEB(5.0, 20.0, 5.0, 0.0),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFFEDF1D6),
                           boxShadow: [
@@ -443,168 +599,139 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           ],
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Overview',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 30.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: FlutterFlowDropDown<String>(
-                                    controller:
-                                        _model.dropDownValueController ??=
-                                            FormFieldController<String>(null),
-                                    options: ['Week', 'Month', 'Year'],
-                                    onChanged: (val) => setState(
-                                        () => _model.dropDownValue = val),
-                                    width: 150.0,
-                                    height: 40.0,
-                                    searchHintTextStyle:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyLarge
-                                            .override(
-                                              fontFamily: 'Poppins',
-                                              color: Color(0xFFEDF1D6),
-                                            ),
-                                    textStyle:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                    hintText: 'Please select...',
-                                    searchHintText: 'Search for an item...',
-                                    fillColor: Color(0xFFEDF1D6),
-                                    elevation: 2.0,
-                                    borderColor:
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              5.0, 5.0, 5.0, 5.0),
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: GetAllLinesCall.call(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: LinearProgressIndicator(
+                                    color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    borderWidth: 0.0,
-                                    borderRadius: 8.0,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 4.0, 12.0, 4.0),
-                                    hidesUnderline: true,
-                                    isSearchable: false,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 20.0, 20.0, 20.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 150.0,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFEDF1D6),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 10.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            'Created (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
-                                                ),
+                                );
+                              }
+                              final listViewGetAllLinesResponse =
+                                  snapshot.data!;
+                              return Builder(
+                                builder: (context) {
+                                  final allLines = getJsonField(
+                                    listViewGetAllLinesResponse.jsonBody,
+                                    r'''$[*]''',
+                                  ).toList();
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: allLines.length,
+                                    itemBuilder: (context, allLinesIndex) {
+                                      final allLinesItem =
+                                          allLines[allLinesIndex];
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5.0, 5.0, 5.0, 5.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFFEDF1D6),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                blurRadius: 4.0,
+                                                color: Color(0x33000000),
+                                                offset: Offset(0.0, 2.0),
+                                              )
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                            ),
                                           ),
-                                          Text(
-                                            'Accepted (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 5.0, 5.0, 5.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    getJsonField(
+                                                      allLinesItem,
+                                                      r'''$.itemDesc''',
+                                                    ).toString(),
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
                                                 ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 10.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            'On Hold (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    getJsonField(
+                                                      allLinesItem,
+                                                      r'''$.projectDesc''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
                                                 ),
-                                          ),
-                                          Text(
-                                            'Approved (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    getJsonField(
+                                                      allLinesItem,
+                                                      r'''$.activityDesc''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
                                                 ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 10.0, 0.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                            'Rejected (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    getJsonField(
+                                                      allLinesItem,
+                                                      r'''$.quantity''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium,
+                                                  ),
                                                 ),
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            'Delivered (10)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  fontSize: 18.0,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
