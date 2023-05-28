@@ -46,6 +46,7 @@ class _ProjectActivitySelectionPageWidgetState
         key: scaffoldKey,
         backgroundColor: Color(0xFFF5EFE6),
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
             child: Container(

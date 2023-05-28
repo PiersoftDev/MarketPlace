@@ -30,6 +30,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
     _model = createModel(context, () => PhoneSignInModel());
 
     _model.whatsappPhoneNumberTextFieldController ??= TextEditingController();
+    authManager.handlePhoneAuthStateChanges(context);
   }
 
   @override
@@ -50,6 +51,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
             child: Container(
@@ -248,10 +250,10 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
                                     await authManager.beginPhoneAuth(
                                       context: context,
                                       phoneNumber: phoneNumberVal,
-                                      onCodeSent: () async {
+                                      onCodeSent: (context) async {
                                         context.goNamedAuth(
                                           'VerifyCode',
-                                          mounted,
+                                          context.mounted,
                                           ignoreRedirect: true,
                                         );
                                       },

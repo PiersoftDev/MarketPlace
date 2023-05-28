@@ -1,56 +1,78 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/algolia_manager.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'items_record.g.dart';
+class ItemsRecord extends FirestoreRecord {
+  ItemsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ItemsRecord implements Built<ItemsRecord, ItemsRecordBuilder> {
-  static Serializer<ItemsRecord> get serializer => _$itemsRecordSerializer;
+  // "Id" field.
+  String? _id;
+  String get id => _id ?? '';
+  bool hasId() => _id != null;
 
-  @BuiltValueField(wireName: 'Id')
-  String? get id;
+  // "Desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
 
-  @BuiltValueField(wireName: 'Desc')
-  String? get desc;
+  // "GroupId" field.
+  String? _groupId;
+  String get groupId => _groupId ?? '';
+  bool hasGroupId() => _groupId != null;
 
-  @BuiltValueField(wireName: 'GroupId')
-  String? get groupId;
+  // "CompanyId" field.
+  String? _companyId;
+  String get companyId => _companyId ?? '';
+  bool hasCompanyId() => _companyId != null;
 
-  @BuiltValueField(wireName: 'CompanyId')
-  String? get companyId;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(ItemsRecordBuilder builder) => builder
-    ..id = ''
-    ..desc = ''
-    ..groupId = ''
-    ..companyId = '';
+  void _initializeFields() {
+    _id = snapshotData['Id'] as String?;
+    _desc = snapshotData['Desc'] as String?;
+    _groupId = snapshotData['GroupId'] as String?;
+    _companyId = snapshotData['CompanyId'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('items');
 
-  static Stream<ItemsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ItemsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ItemsRecord.fromSnapshot(s));
 
-  static Future<ItemsRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<ItemsRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => ItemsRecord.fromSnapshot(s));
 
-  static ItemsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) => ItemsRecord(
-        (c) => c
-          ..id = snapshot.data['Id']
-          ..desc = snapshot.data['Desc']
-          ..groupId = snapshot.data['GroupId']
-          ..companyId = snapshot.data['CompanyId']
-          ..ffRef = ItemsRecord.collection.doc(snapshot.objectID),
+  static ItemsRecord fromSnapshot(DocumentSnapshot snapshot) => ItemsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static ItemsRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ItemsRecord._(reference, mapFromFirestore(data));
+
+  static ItemsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      ItemsRecord.getDocumentFromData(
+        {
+          'Id': snapshot.data['Id'],
+          'Desc': snapshot.data['Desc'],
+          'GroupId': snapshot.data['GroupId'],
+          'CompanyId': snapshot.data['CompanyId'],
+        },
+        ItemsRecord.collection.doc(snapshot.objectID),
       );
 
   static Future<List<ItemsRecord>> search({
@@ -71,14 +93,9 @@ abstract class ItemsRecord implements Built<ItemsRecord, ItemsRecordBuilder> {
           )
           .then((r) => r.map(fromAlgolia).toList());
 
-  ItemsRecord._();
-  factory ItemsRecord([void Function(ItemsRecordBuilder) updates]) =
-      _$ItemsRecord;
-
-  static ItemsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+  @override
+  String toString() =>
+      'ItemsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createItemsRecordData({
@@ -87,15 +104,13 @@ Map<String, dynamic> createItemsRecordData({
   String? groupId,
   String? companyId,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ItemsRecord.serializer,
-    ItemsRecord(
-      (i) => i
-        ..id = id
-        ..desc = desc
-        ..groupId = groupId
-        ..companyId = companyId,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'Id': id,
+      'Desc': desc,
+      'GroupId': groupId,
+      'CompanyId': companyId,
+    }.withoutNulls,
   );
 
   return firestoreData;

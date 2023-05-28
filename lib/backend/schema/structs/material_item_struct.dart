@@ -1,35 +1,95 @@
-import 'dart:async';
+// ignore_for_file: unnecessary_getters_setters
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../index.dart';
-import '../serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
-part 'material_item_struct.g.dart';
+import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-abstract class MaterialItemStruct
-    implements Built<MaterialItemStruct, MaterialItemStructBuilder> {
-  static Serializer<MaterialItemStruct> get serializer =>
-      _$materialItemStructSerializer;
+class MaterialItemStruct extends FFFirebaseStruct {
+  MaterialItemStruct({
+    String? id,
+    double? quantity,
+    String? uom,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
+  })  : _id = id,
+        _quantity = quantity,
+        _uom = uom,
+        super(firestoreUtilData);
 
-  String? get id;
+  // "id" field.
+  String? _id;
+  String get id => _id ?? '';
+  set id(String? val) => _id = val;
+  bool hasId() => _id != null;
 
-  double? get quantity;
+  // "quantity" field.
+  double? _quantity;
+  double get quantity => _quantity ?? 0.0;
+  set quantity(double? val) => _quantity = val;
+  void incrementQuantity(double amount) => _quantity = quantity + amount;
+  bool hasQuantity() => _quantity != null;
 
-  String? get uom;
+  // "uom" field.
+  String? _uom;
+  String get uom => _uom ?? '';
+  set uom(String? val) => _uom = val;
+  bool hasUom() => _uom != null;
 
-  /// Utility class for Firestore updates
-  FirestoreUtilData get firestoreUtilData;
+  static MaterialItemStruct fromMap(Map<String, dynamic> data) =>
+      MaterialItemStruct(
+        id: data['id'] as String?,
+        quantity: castToType<double>(data['quantity']),
+        uom: data['uom'] as String?,
+      );
 
-  static void _initializeBuilder(MaterialItemStructBuilder builder) => builder
-    ..id = ''
-    ..quantity = 0.0
-    ..uom = ''
-    ..firestoreUtilData = FirestoreUtilData();
+  static MaterialItemStruct? maybeFromMap(dynamic data) =>
+      data is Map<String, dynamic> ? MaterialItemStruct.fromMap(data) : null;
 
-  MaterialItemStruct._();
-  factory MaterialItemStruct(
-          [void Function(MaterialItemStructBuilder) updates]) =
-      _$MaterialItemStruct;
+  Map<String, dynamic> toMap() => {
+        'id': _id,
+        'quantity': _quantity,
+        'uom': _uom,
+      }.withoutNulls;
+
+  @override
+  Map<String, dynamic> toSerializableMap() => {
+        'id': serializeParam(
+          _id,
+          ParamType.String,
+        ),
+        'quantity': serializeParam(
+          _quantity,
+          ParamType.double,
+        ),
+        'uom': serializeParam(
+          _uom,
+          ParamType.String,
+        ),
+      }.withoutNulls;
+
+  static MaterialItemStruct fromSerializableMap(Map<String, dynamic> data) =>
+      MaterialItemStruct(
+        id: deserializeParam(
+          data['id'],
+          ParamType.String,
+          false,
+        ),
+        quantity: deserializeParam(
+          data['quantity'],
+          ParamType.double,
+          false,
+        ),
+        uom: deserializeParam(
+          data['uom'],
+          ParamType.String,
+          false,
+        ),
+      );
+
+  @override
+  String toString() => 'MaterialItemStruct(${toMap()})';
 }
 
 MaterialItemStruct createMaterialItemStruct({
@@ -42,28 +102,24 @@ MaterialItemStruct createMaterialItemStruct({
   bool delete = false,
 }) =>
     MaterialItemStruct(
-      (m) => m
-        ..id = id
-        ..quantity = quantity
-        ..uom = uom
-        ..firestoreUtilData = FirestoreUtilData(
-          clearUnsetFields: clearUnsetFields,
-          create: create,
-          delete: delete,
-          fieldValues: fieldValues,
-        ),
+      id: id,
+      quantity: quantity,
+      uom: uom,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
 
 MaterialItemStruct? updateMaterialItemStruct(
   MaterialItemStruct? materialItem, {
   bool clearUnsetFields = true,
 }) =>
-    materialItem != null
-        ? (materialItem.toBuilder()
-              ..firestoreUtilData =
-                  FirestoreUtilData(clearUnsetFields: clearUnsetFields))
-            .build()
-        : null;
+    materialItem
+      ?..firestoreUtilData =
+          FirestoreUtilData(clearUnsetFields: clearUnsetFields);
 
 void addMaterialItemStructData(
   Map<String, dynamic> firestoreData,
@@ -89,8 +145,6 @@ void addMaterialItemStructData(
 
   final create = materialItem.firestoreUtilData.create;
   firestoreData.addAll(create ? mergeNestedFields(nestedData) : nestedData);
-
-  return;
 }
 
 Map<String, dynamic> getMaterialItemFirestoreData(
@@ -100,8 +154,7 @@ Map<String, dynamic> getMaterialItemFirestoreData(
   if (materialItem == null) {
     return {};
   }
-  final firestoreData =
-      serializers.toFirestore(MaterialItemStruct.serializer, materialItem);
+  final firestoreData = mapToFirestore(materialItem.toMap());
 
   // Add any Firestore field values
   materialItem.firestoreUtilData.fieldValues
@@ -113,5 +166,5 @@ Map<String, dynamic> getMaterialItemFirestoreData(
 List<Map<String, dynamic>> getMaterialItemListFirestoreData(
   List<MaterialItemStruct>? materialItems,
 ) =>
-    materialItems?.map((m) => getMaterialItemFirestoreData(m, true)).toList() ??
+    materialItems?.map((e) => getMaterialItemFirestoreData(e, true)).toList() ??
     [];

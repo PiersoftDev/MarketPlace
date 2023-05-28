@@ -45,6 +45,7 @@ class _OrderSubmitSuccessWidgetState extends State<OrderSubmitSuccessWidget> {
         key: scaffoldKey,
         backgroundColor: Color(0xFFEAE6E2),
         body: SafeArea(
+          top: true,
           child: Container(
             width: double.infinity,
             height: double.infinity,

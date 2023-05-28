@@ -46,6 +46,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
             child: Container(
@@ -176,7 +177,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                               return;
                             }
 
-                            context.goNamedAuth('Dashboard', mounted);
+                            context.goNamedAuth('Dashboard', context.mounted);
                           },
                           text: 'Verify',
                           options: FFButtonOptions(

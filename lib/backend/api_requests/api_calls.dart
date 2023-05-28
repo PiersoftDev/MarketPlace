@@ -124,7 +124,7 @@ class SaveMaterialIndentCall {
     return ApiManager.instance.makeApiCall(
       callName: 'saveMaterialIndent',
       apiUrl:
-          'http://13.232.221.196:8081/v1/purchase/material-indent/add-material',
+          'https://13.232.221.196:8081/v1/purchase/material-indent/add-material',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ class GetLinesByIdCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getLinesById',
       apiUrl:
-          'http://13.232.221.196:8081/v1/purchase/material-indent/${orderId}',
+          'https://13.232.221.196:8081/v1/purchase/material-indent/${orderId}',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -187,7 +187,7 @@ class GetAllLinesCall {
   static Future<ApiCallResponse> call() {
     return ApiManager.instance.makeApiCall(
       callName: 'getAllLines',
-      apiUrl: 'http://13.232.221.196:8081/v1/purchase/material-indent/',
+      apiUrl: 'https://13.232.221.196:8081/v1/purchase/material-indent/',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

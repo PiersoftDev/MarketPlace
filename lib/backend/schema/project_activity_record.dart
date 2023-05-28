@@ -1,60 +1,79 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/algolia_manager.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'project_activity_record.g.dart';
+class ProjectActivityRecord extends FirestoreRecord {
+  ProjectActivityRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class ProjectActivityRecord
-    implements Built<ProjectActivityRecord, ProjectActivityRecordBuilder> {
-  static Serializer<ProjectActivityRecord> get serializer =>
-      _$projectActivityRecordSerializer;
+  // "Id" field.
+  String? _id;
+  String get id => _id ?? '';
+  bool hasId() => _id != null;
 
-  @BuiltValueField(wireName: 'Id')
-  String? get id;
+  // "Desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
 
-  @BuiltValueField(wireName: 'Desc')
-  String? get desc;
+  // "ProjectId" field.
+  String? _projectId;
+  String get projectId => _projectId ?? '';
+  bool hasProjectId() => _projectId != null;
 
-  @BuiltValueField(wireName: 'ProjectId')
-  String? get projectId;
+  // "CompanyId" field.
+  String? _companyId;
+  String get companyId => _companyId ?? '';
+  bool hasCompanyId() => _companyId != null;
 
-  @BuiltValueField(wireName: 'CompanyId')
-  String? get companyId;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(ProjectActivityRecordBuilder builder) =>
-      builder
-        ..id = ''
-        ..desc = ''
-        ..projectId = ''
-        ..companyId = '';
+  void _initializeFields() {
+    _id = snapshotData['Id'] as String?;
+    _desc = snapshotData['Desc'] as String?;
+    _projectId = snapshotData['ProjectId'] as String?;
+    _companyId = snapshotData['CompanyId'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('project-activity');
 
-  static Stream<ProjectActivityRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<ProjectActivityRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => ProjectActivityRecord.fromSnapshot(s));
 
   static Future<ProjectActivityRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => ProjectActivityRecord.fromSnapshot(s));
+
+  static ProjectActivityRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      ProjectActivityRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static ProjectActivityRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      ProjectActivityRecord._(reference, mapFromFirestore(data));
 
   static ProjectActivityRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
-      ProjectActivityRecord(
-        (c) => c
-          ..id = snapshot.data['Id']
-          ..desc = snapshot.data['Desc']
-          ..projectId = snapshot.data['ProjectId']
-          ..companyId = snapshot.data['CompanyId']
-          ..ffRef = ProjectActivityRecord.collection.doc(snapshot.objectID),
+      ProjectActivityRecord.getDocumentFromData(
+        {
+          'Id': snapshot.data['Id'],
+          'Desc': snapshot.data['Desc'],
+          'ProjectId': snapshot.data['ProjectId'],
+          'CompanyId': snapshot.data['CompanyId'],
+        },
+        ProjectActivityRecord.collection.doc(snapshot.objectID),
       );
 
   static Future<List<ProjectActivityRecord>> search({
@@ -75,15 +94,9 @@ abstract class ProjectActivityRecord
           )
           .then((r) => r.map(fromAlgolia).toList());
 
-  ProjectActivityRecord._();
-  factory ProjectActivityRecord(
-          [void Function(ProjectActivityRecordBuilder) updates]) =
-      _$ProjectActivityRecord;
-
-  static ProjectActivityRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+  @override
+  String toString() =>
+      'ProjectActivityRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createProjectActivityRecordData({
@@ -92,15 +105,13 @@ Map<String, dynamic> createProjectActivityRecordData({
   String? projectId,
   String? companyId,
 }) {
-  final firestoreData = serializers.toFirestore(
-    ProjectActivityRecord.serializer,
-    ProjectActivityRecord(
-      (p) => p
-        ..id = id
-        ..desc = desc
-        ..projectId = projectId
-        ..companyId = companyId,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'Id': id,
+      'Desc': desc,
+      'ProjectId': projectId,
+      'CompanyId': companyId,
+    }.withoutNulls,
   );
 
   return firestoreData;

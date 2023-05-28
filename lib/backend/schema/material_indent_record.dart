@@ -1,85 +1,136 @@
 import 'dart:async';
 
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
+
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'material_indent_record.g.dart';
+class MaterialIndentRecord extends FirestoreRecord {
+  MaterialIndentRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class MaterialIndentRecord
-    implements Built<MaterialIndentRecord, MaterialIndentRecordBuilder> {
-  static Serializer<MaterialIndentRecord> get serializer =>
-      _$materialIndentRecordSerializer;
+  // "projectId" field.
+  String? _projectId;
+  String get projectId => _projectId ?? '';
+  bool hasProjectId() => _projectId != null;
 
-  String? get projectId;
+  // "activityId" field.
+  String? _activityId;
+  String get activityId => _activityId ?? '';
+  bool hasActivityId() => _activityId != null;
 
-  String? get activityId;
+  // "itemId" field.
+  String? _itemId;
+  String get itemId => _itemId ?? '';
+  bool hasItemId() => _itemId != null;
 
-  String? get itemId;
+  // "quantity" field.
+  int? _quantity;
+  int get quantity => _quantity ?? 0;
+  bool hasQuantity() => _quantity != null;
 
-  int? get quantity;
+  // "uom" field.
+  String? _uom;
+  String get uom => _uom ?? '';
+  bool hasUom() => _uom != null;
 
-  String? get uom;
+  // "createdDate" field.
+  DateTime? _createdDate;
+  DateTime? get createdDate => _createdDate;
+  bool hasCreatedDate() => _createdDate != null;
 
-  DateTime? get createdDate;
+  // "createdBy" field.
+  String? _createdBy;
+  String get createdBy => _createdBy ?? '';
+  bool hasCreatedBy() => _createdBy != null;
 
-  String? get createdBy;
+  // "status" field.
+  String? _status;
+  String get status => _status ?? '';
+  bool hasStatus() => _status != null;
 
-  String? get status;
+  // "approvedBy" field.
+  String? _approvedBy;
+  String get approvedBy => _approvedBy ?? '';
+  bool hasApprovedBy() => _approvedBy != null;
 
-  String? get approvedBy;
+  // "approvedDateTime" field.
+  DateTime? _approvedDateTime;
+  DateTime? get approvedDateTime => _approvedDateTime;
+  bool hasApprovedDateTime() => _approvedDateTime != null;
 
-  DateTime? get approvedDateTime;
+  // "expectedDate" field.
+  String? _expectedDate;
+  String get expectedDate => _expectedDate ?? '';
+  bool hasExpectedDate() => _expectedDate != null;
 
-  String? get expectedDate;
+  // "orderId" field.
+  String? _orderId;
+  String get orderId => _orderId ?? '';
+  bool hasOrderId() => _orderId != null;
 
-  String? get orderId;
+  // "projectName" field.
+  String? _projectName;
+  String get projectName => _projectName ?? '';
+  bool hasProjectName() => _projectName != null;
 
-  String? get projectName;
+  // "activityName" field.
+  String? _activityName;
+  String get activityName => _activityName ?? '';
+  bool hasActivityName() => _activityName != null;
 
-  String? get activityName;
+  // "itemDesc" field.
+  String? _itemDesc;
+  String get itemDesc => _itemDesc ?? '';
+  bool hasItemDesc() => _itemDesc != null;
 
-  String? get itemDesc;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(MaterialIndentRecordBuilder builder) => builder
-    ..projectId = ''
-    ..activityId = ''
-    ..itemId = ''
-    ..quantity = 0
-    ..uom = ''
-    ..createdBy = ''
-    ..status = ''
-    ..approvedBy = ''
-    ..expectedDate = ''
-    ..orderId = ''
-    ..projectName = ''
-    ..activityName = ''
-    ..itemDesc = '';
+  void _initializeFields() {
+    _projectId = snapshotData['projectId'] as String?;
+    _activityId = snapshotData['activityId'] as String?;
+    _itemId = snapshotData['itemId'] as String?;
+    _quantity = snapshotData['quantity'] as int?;
+    _uom = snapshotData['uom'] as String?;
+    _createdDate = snapshotData['createdDate'] as DateTime?;
+    _createdBy = snapshotData['createdBy'] as String?;
+    _status = snapshotData['status'] as String?;
+    _approvedBy = snapshotData['approvedBy'] as String?;
+    _approvedDateTime = snapshotData['approvedDateTime'] as DateTime?;
+    _expectedDate = snapshotData['expectedDate'] as String?;
+    _orderId = snapshotData['orderId'] as String?;
+    _projectName = snapshotData['projectName'] as String?;
+    _activityName = snapshotData['activityName'] as String?;
+    _itemDesc = snapshotData['itemDesc'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('material_indent');
 
-  static Stream<MaterialIndentRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<MaterialIndentRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => MaterialIndentRecord.fromSnapshot(s));
 
   static Future<MaterialIndentRecord> getDocumentOnce(DocumentReference ref) =>
-      ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
+      ref.get().then((s) => MaterialIndentRecord.fromSnapshot(s));
 
-  MaterialIndentRecord._();
-  factory MaterialIndentRecord(
-          [void Function(MaterialIndentRecordBuilder) updates]) =
-      _$MaterialIndentRecord;
+  static MaterialIndentRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      MaterialIndentRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
 
   static MaterialIndentRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      MaterialIndentRecord._(reference, mapFromFirestore(data));
+
+  @override
+  String toString() =>
+      'MaterialIndentRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createMaterialIndentRecordData({
@@ -99,26 +150,24 @@ Map<String, dynamic> createMaterialIndentRecordData({
   String? activityName,
   String? itemDesc,
 }) {
-  final firestoreData = serializers.toFirestore(
-    MaterialIndentRecord.serializer,
-    MaterialIndentRecord(
-      (m) => m
-        ..projectId = projectId
-        ..activityId = activityId
-        ..itemId = itemId
-        ..quantity = quantity
-        ..uom = uom
-        ..createdDate = createdDate
-        ..createdBy = createdBy
-        ..status = status
-        ..approvedBy = approvedBy
-        ..approvedDateTime = approvedDateTime
-        ..expectedDate = expectedDate
-        ..orderId = orderId
-        ..projectName = projectName
-        ..activityName = activityName
-        ..itemDesc = itemDesc,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'projectId': projectId,
+      'activityId': activityId,
+      'itemId': itemId,
+      'quantity': quantity,
+      'uom': uom,
+      'createdDate': createdDate,
+      'createdBy': createdBy,
+      'status': status,
+      'approvedBy': approvedBy,
+      'approvedDateTime': approvedDateTime,
+      'expectedDate': expectedDate,
+      'orderId': orderId,
+      'projectName': projectName,
+      'activityName': activityName,
+      'itemDesc': itemDesc,
+    }.withoutNulls,
   );
 
   return firestoreData;

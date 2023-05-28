@@ -45,6 +45,7 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
         key: scaffoldKey,
         backgroundColor: Color(0xFFFEEEA6),
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
             child: Container(

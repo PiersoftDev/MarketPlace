@@ -1,54 +1,72 @@
 import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
+import '/backend/algolia/algolia_manager.dart';
+
+import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import 'serializers.dart';
-import 'package:built_value/built_value.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
-part 'mp_projects_record.g.dart';
+class MpProjectsRecord extends FirestoreRecord {
+  MpProjectsRecord._(
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
+    _initializeFields();
+  }
 
-abstract class MpProjectsRecord
-    implements Built<MpProjectsRecord, MpProjectsRecordBuilder> {
-  static Serializer<MpProjectsRecord> get serializer =>
-      _$mpProjectsRecordSerializer;
+  // "Id" field.
+  String? _id;
+  String get id => _id ?? '';
+  bool hasId() => _id != null;
 
-  @BuiltValueField(wireName: 'Id')
-  String? get id;
+  // "Desc" field.
+  String? _desc;
+  String get desc => _desc ?? '';
+  bool hasDesc() => _desc != null;
 
-  @BuiltValueField(wireName: 'Desc')
-  String? get desc;
+  // "CompanyId" field.
+  String? _companyId;
+  String get companyId => _companyId ?? '';
+  bool hasCompanyId() => _companyId != null;
 
-  @BuiltValueField(wireName: 'CompanyId')
-  String? get companyId;
-
-  @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference? get ffRef;
-  DocumentReference get reference => ffRef!;
-
-  static void _initializeBuilder(MpProjectsRecordBuilder builder) => builder
-    ..id = ''
-    ..desc = ''
-    ..companyId = '';
+  void _initializeFields() {
+    _id = snapshotData['Id'] as String?;
+    _desc = snapshotData['Desc'] as String?;
+    _companyId = snapshotData['CompanyId'] as String?;
+  }
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('mp-projects');
 
-  static Stream<MpProjectsRecord> getDocument(DocumentReference ref) => ref
-      .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Stream<MpProjectsRecord> getDocument(DocumentReference ref) =>
+      ref.snapshots().map((s) => MpProjectsRecord.fromSnapshot(s));
 
-  static Future<MpProjectsRecord> getDocumentOnce(DocumentReference ref) => ref
-      .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
+  static Future<MpProjectsRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then((s) => MpProjectsRecord.fromSnapshot(s));
+
+  static MpProjectsRecord fromSnapshot(DocumentSnapshot snapshot) =>
+      MpProjectsRecord._(
+        snapshot.reference,
+        mapFromFirestore(snapshot.data() as Map<String, dynamic>),
+      );
+
+  static MpProjectsRecord getDocumentFromData(
+    Map<String, dynamic> data,
+    DocumentReference reference,
+  ) =>
+      MpProjectsRecord._(reference, mapFromFirestore(data));
 
   static MpProjectsRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
-      MpProjectsRecord(
-        (c) => c
-          ..id = snapshot.data['Id']
-          ..desc = snapshot.data['Desc']
-          ..companyId = snapshot.data['CompanyId']
-          ..ffRef = MpProjectsRecord.collection.doc(snapshot.objectID),
+      MpProjectsRecord.getDocumentFromData(
+        {
+          'Id': snapshot.data['Id'],
+          'Desc': snapshot.data['Desc'],
+          'CompanyId': snapshot.data['CompanyId'],
+        },
+        MpProjectsRecord.collection.doc(snapshot.objectID),
       );
 
   static Future<List<MpProjectsRecord>> search({
@@ -69,14 +87,9 @@ abstract class MpProjectsRecord
           )
           .then((r) => r.map(fromAlgolia).toList());
 
-  MpProjectsRecord._();
-  factory MpProjectsRecord([void Function(MpProjectsRecordBuilder) updates]) =
-      _$MpProjectsRecord;
-
-  static MpProjectsRecord getDocumentFromData(
-          Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
+  @override
+  String toString() =>
+      'MpProjectsRecord(reference: ${reference.path}, data: $snapshotData)';
 }
 
 Map<String, dynamic> createMpProjectsRecordData({
@@ -84,14 +97,12 @@ Map<String, dynamic> createMpProjectsRecordData({
   String? desc,
   String? companyId,
 }) {
-  final firestoreData = serializers.toFirestore(
-    MpProjectsRecord.serializer,
-    MpProjectsRecord(
-      (m) => m
-        ..id = id
-        ..desc = desc
-        ..companyId = companyId,
-    ),
+  final firestoreData = mapToFirestore(
+    <String, dynamic>{
+      'Id': id,
+      'Desc': desc,
+      'CompanyId': companyId,
+    }.withoutNulls,
   );
 
   return firestoreData;

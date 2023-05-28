@@ -50,6 +50,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         key: scaffoldKey,
         backgroundColor: Color(0xFFF5EFE6),
         body: SafeArea(
+          top: true,
           child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
             child: Container(
@@ -115,7 +116,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                     GoRouter.of(context)
                                         .clearRedirectLocation();
 
-                                    context.goNamedAuth('HomePage', mounted);
+                                    context.goNamedAuth(
+                                        'HomePage', context.mounted);
                                   },
                                   child: Icon(
                                     Icons.settings_power,
