@@ -347,16 +347,16 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                                   Colors.transparent,
                                               enableDrag: false,
                                               context: context,
-                                              builder: (bottomSheetContext) {
+                                              builder: (context) {
                                                 return GestureDetector(
                                                   onTap: () =>
                                                       FocusScope.of(context)
                                                           .requestFocus(
                                                               _unfocusNode),
                                                   child: Padding(
-                                                    padding: MediaQuery.of(
-                                                            bottomSheetContext)
-                                                        .viewInsets,
+                                                    padding:
+                                                        MediaQuery.of(context)
+                                                            .viewInsets,
                                                     child: Container(
                                                       height:
                                                           MediaQuery.of(context)
