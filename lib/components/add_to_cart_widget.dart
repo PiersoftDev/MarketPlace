@@ -188,7 +188,7 @@ class _AddToCartWidgetState extends State<AddToCartWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 30.0, 0.0),
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.03,
+                            width: MediaQuery.sizeOf(context).width * 0.03,
                             child: TextFormField(
                               controller: _model.textController,
                               obscureText: false,

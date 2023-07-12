@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
+
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
@@ -93,7 +95,7 @@ class MaterialIndentRecord extends FirestoreRecord {
     _projectId = snapshotData['projectId'] as String?;
     _activityId = snapshotData['activityId'] as String?;
     _itemId = snapshotData['itemId'] as String?;
-    _quantity = snapshotData['quantity'] as int?;
+    _quantity = castToType<int>(snapshotData['quantity']);
     _uom = snapshotData['uom'] as String?;
     _createdDate = snapshotData['createdDate'] as DateTime?;
     _createdBy = snapshotData['createdBy'] as String?;
@@ -131,6 +133,14 @@ class MaterialIndentRecord extends FirestoreRecord {
   @override
   String toString() =>
       'MaterialIndentRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is MaterialIndentRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createMaterialIndentRecordData({
@@ -171,4 +181,50 @@ Map<String, dynamic> createMaterialIndentRecordData({
   );
 
   return firestoreData;
+}
+
+class MaterialIndentRecordDocumentEquality
+    implements Equality<MaterialIndentRecord> {
+  const MaterialIndentRecordDocumentEquality();
+
+  @override
+  bool equals(MaterialIndentRecord? e1, MaterialIndentRecord? e2) {
+    return e1?.projectId == e2?.projectId &&
+        e1?.activityId == e2?.activityId &&
+        e1?.itemId == e2?.itemId &&
+        e1?.quantity == e2?.quantity &&
+        e1?.uom == e2?.uom &&
+        e1?.createdDate == e2?.createdDate &&
+        e1?.createdBy == e2?.createdBy &&
+        e1?.status == e2?.status &&
+        e1?.approvedBy == e2?.approvedBy &&
+        e1?.approvedDateTime == e2?.approvedDateTime &&
+        e1?.expectedDate == e2?.expectedDate &&
+        e1?.orderId == e2?.orderId &&
+        e1?.projectName == e2?.projectName &&
+        e1?.activityName == e2?.activityName &&
+        e1?.itemDesc == e2?.itemDesc;
+  }
+
+  @override
+  int hash(MaterialIndentRecord? e) => const ListEquality().hash([
+        e?.projectId,
+        e?.activityId,
+        e?.itemId,
+        e?.quantity,
+        e?.uom,
+        e?.createdDate,
+        e?.createdBy,
+        e?.status,
+        e?.approvedBy,
+        e?.approvedDateTime,
+        e?.expectedDate,
+        e?.orderId,
+        e?.projectName,
+        e?.activityName,
+        e?.itemDesc
+      ]);
+
+  @override
+  bool isValidKey(Object? o) => o is MaterialIndentRecord;
 }

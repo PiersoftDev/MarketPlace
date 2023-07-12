@@ -22,7 +22,6 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
   late PhoneSignInModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -46,7 +44,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -66,7 +64,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
                   children: [
                     Lottie.asset(
                       'assets/lottie_animations/106680-login-and-sign-up.json',
-                      width: MediaQuery.of(context).size.width * 1.0,
+                      width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 300.0,
                       fit: BoxFit.cover,
                       animate: true,
@@ -91,7 +89,7 @@ class _PhoneSignInWidgetState extends State<PhoneSignInWidget> {
                                       30.0, 30.0, 30.0, 30.0),
                                   child: Container(
                                     width:
-                                        MediaQuery.of(context).size.width * 1.0,
+                                        MediaQuery.sizeOf(context).width * 1.0,
                                     height: 55.0,
                                     decoration: BoxDecoration(
                                       color: Color(0xFFF5EFE6),

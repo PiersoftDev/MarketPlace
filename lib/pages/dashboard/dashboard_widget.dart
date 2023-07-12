@@ -24,7 +24,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   late DashboardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -36,7 +35,6 @@ class _DashboardWidgetState extends State<DashboardWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -45,7 +43,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFF5EFE6),
@@ -55,7 +53,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
             child: Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 1.0,
+              height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
                 color: Color(0xFFF5EFE6),
               ),
@@ -68,7 +66,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.05,
+                        height: MediaQuery.sizeOf(context).height * 0.05,
                         decoration: BoxDecoration(
                           color: Color(0xFFF5EFE6),
                         ),
@@ -608,7 +606,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           EdgeInsetsDirectional.fromSTEB(5.0, 20.0, 5.0, 0.0),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.4,
+                        height: MediaQuery.sizeOf(context).height * 0.4,
                         decoration: BoxDecoration(
                           color: Color(0xFFEDF1D6),
                           boxShadow: [
@@ -655,8 +653,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                             5.0, 5.0, 5.0, 5.0),
                                         child: Container(
                                           width: double.infinity,
-                                          height: MediaQuery.of(context)
-                                                  .size
+                                          height: MediaQuery.sizeOf(context)
                                                   .height *
                                               0.16,
                                           decoration: BoxDecoration(

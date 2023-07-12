@@ -23,7 +23,6 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
   late ItemSelectionPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -46,7 +44,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFF5EFE6),
@@ -56,7 +54,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
             child: Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 1.0,
+              height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
                 color: Color(0xFFF5EFE6),
               ),
@@ -281,7 +279,7 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Container(
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.6,
+                          height: MediaQuery.sizeOf(context).height * 0.6,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -349,20 +347,19 @@ class _ItemSelectionPageWidgetState extends State<ItemSelectionPageWidget> {
                                               context: context,
                                               builder: (context) {
                                                 return GestureDetector(
-                                                  onTap: () =>
-                                                      FocusScope.of(context)
-                                                          .requestFocus(
-                                                              _unfocusNode),
+                                                  onTap: () => FocusScope.of(
+                                                          context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode),
                                                   child: Padding(
                                                     padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
                                                     child: Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.6,
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.6,
                                                       child: AddToCartWidget(),
                                                     ),
                                                   ),

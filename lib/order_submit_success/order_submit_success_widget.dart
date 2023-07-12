@@ -19,7 +19,6 @@ class _OrderSubmitSuccessWidgetState extends State<OrderSubmitSuccessWidget> {
   late OrderSubmitSuccessModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _OrderSubmitSuccessWidgetState extends State<OrderSubmitSuccessWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _OrderSubmitSuccessWidgetState extends State<OrderSubmitSuccessWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFEAE6E2),

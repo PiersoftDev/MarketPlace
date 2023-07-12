@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 class PhoneSignInModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for CountryCodeDropDown widget.
   String? countryCodeDropDownValue;
@@ -26,9 +27,11 @@ class PhoneSignInModel extends FlutterFlowModel {
   void initState(BuildContext context) {}
 
   void dispose() {
+    unfocusNode.dispose();
     whatsappPhoneNumberTextFieldController?.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

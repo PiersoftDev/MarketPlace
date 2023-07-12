@@ -22,7 +22,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
@@ -49,7 +48,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -58,7 +56,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFF5EFE6),
@@ -68,7 +66,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
             child: Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 1.0,
+              height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
                 color: Color(0xFFF5EFE6),
               ),
@@ -78,7 +76,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   children: [
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.25,
+                      height: MediaQuery.sizeOf(context).height * 0.25,
                       decoration: BoxDecoration(
                         color: Color(0xFFF5EFE6),
                       ),
@@ -90,14 +88,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           children: [
                             Image.asset(
                               'assets/images/[removal.ai]_tmp-643b3f6839eeb.png',
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              height: MediaQuery.of(context).size.height * 0.3,
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              height: MediaQuery.sizeOf(context).height * 0.3,
                               fit: BoxFit.contain,
                             ),
                             Image.asset(
                               'assets/images/[removal.ai]_tmp-643b3f48f3e38.png',
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              height: MediaQuery.of(context).size.height * 0.4,
+                              width: MediaQuery.sizeOf(context).width * 0.5,
+                              height: MediaQuery.sizeOf(context).height * 0.4,
                               fit: BoxFit.contain,
                             ),
                           ],
@@ -109,7 +107,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           10.0, 10.0, 10.0, 10.0),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.25,
+                        height: MediaQuery.sizeOf(context).height * 0.25,
                         decoration: BoxDecoration(
                           color: Color(0xFFF5EFE6),
                         ),
@@ -121,16 +119,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             children: [
                               Image.asset(
                                 'assets/images/[removal.ai]_tmp-643b401a6107b.png',
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.4,
+                                width: MediaQuery.sizeOf(context).width * 0.5,
+                                height: MediaQuery.sizeOf(context).height * 0.4,
                                 fit: BoxFit.contain,
                               ),
                               Image.asset(
                                 'assets/images/image7.png',
-                                width: MediaQuery.of(context).size.width * 0.4,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: MediaQuery.sizeOf(context).height * 0.3,
                                 fit: BoxFit.contain,
                               ),
                             ],
@@ -143,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           10.0, 10.0, 10.0, 10.0),
                       child: Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.25,
+                        height: MediaQuery.sizeOf(context).height * 0.25,
                         decoration: BoxDecoration(
                           color: Color(0xFFF5EFE6),
                         ),
@@ -155,9 +151,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             children: [
                               Image.asset(
                                 'assets/images/image1.png',
-                                width: MediaQuery.of(context).size.width * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.4,
+                                width: MediaQuery.sizeOf(context).width * 0.3,
+                                height: MediaQuery.sizeOf(context).height * 0.4,
                                 fit: BoxFit.contain,
                               ),
                               Padding(
@@ -165,10 +160,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     10.0, 10.0, 10.0, 10.0),
                                 child: Image.asset(
                                   'assets/images/Untitledrounded.png',
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                  width: MediaQuery.sizeOf(context).width * 0.5,
                                   height:
-                                      MediaQuery.of(context).size.height * 0.4,
+                                      MediaQuery.sizeOf(context).height * 0.4,
                                   fit: BoxFit.contain,
                                 ).animateOnPageLoad(
                                     animationsMap['imageOnPageLoadAnimation']!),

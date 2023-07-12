@@ -90,6 +90,17 @@ class MaterialItemStruct extends FFFirebaseStruct {
 
   @override
   String toString() => 'MaterialItemStruct(${toMap()})';
+
+  @override
+  bool operator ==(Object other) {
+    return other is MaterialItemStruct &&
+        id == other.id &&
+        quantity == other.quantity &&
+        uom == other.uom;
+  }
+
+  @override
+  int get hashCode => const ListEquality().hash([id, quantity, uom]);
 }
 
 MaterialItemStruct createMaterialItemStruct({
@@ -116,10 +127,13 @@ MaterialItemStruct createMaterialItemStruct({
 MaterialItemStruct? updateMaterialItemStruct(
   MaterialItemStruct? materialItem, {
   bool clearUnsetFields = true,
+  bool create = false,
 }) =>
     materialItem
-      ?..firestoreUtilData =
-          FirestoreUtilData(clearUnsetFields: clearUnsetFields);
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
 
 void addMaterialItemStructData(
   Map<String, dynamic> firestoreData,

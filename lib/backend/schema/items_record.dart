@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
 import '/backend/algolia/algolia_manager.dart';
+import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
@@ -96,6 +97,14 @@ class ItemsRecord extends FirestoreRecord {
   @override
   String toString() =>
       'ItemsRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is ItemsRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createItemsRecordData({
@@ -114,4 +123,23 @@ Map<String, dynamic> createItemsRecordData({
   );
 
   return firestoreData;
+}
+
+class ItemsRecordDocumentEquality implements Equality<ItemsRecord> {
+  const ItemsRecordDocumentEquality();
+
+  @override
+  bool equals(ItemsRecord? e1, ItemsRecord? e2) {
+    return e1?.id == e2?.id &&
+        e1?.desc == e2?.desc &&
+        e1?.groupId == e2?.groupId &&
+        e1?.companyId == e2?.companyId;
+  }
+
+  @override
+  int hash(ItemsRecord? e) =>
+      const ListEquality().hash([e?.id, e?.desc, e?.groupId, e?.companyId]);
+
+  @override
+  bool isValidKey(Object? o) => o is ItemsRecord;
 }

@@ -19,7 +19,6 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
   late NewDashboardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFFFEEEA6),
@@ -50,7 +48,7 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
             child: Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 1.0,
+              height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
                 color: Color(0xFFFEEEA6),
               ),
@@ -64,8 +62,8 @@ class _NewDashboardWidgetState extends State<NewDashboardWidget> {
                     fit: BoxFit.cover,
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 1.0,
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: MediaQuery.sizeOf(context).height * 0.7,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       image: DecorationImage(

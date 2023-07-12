@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:from_css_color/from_css_color.dart';
 import '/backend/algolia/algolia_manager.dart';
+import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
@@ -97,6 +98,14 @@ class ProjectActivityRecord extends FirestoreRecord {
   @override
   String toString() =>
       'ProjectActivityRecord(reference: ${reference.path}, data: $snapshotData)';
+
+  @override
+  int get hashCode => reference.path.hashCode;
+
+  @override
+  bool operator ==(other) =>
+      other is ProjectActivityRecord &&
+      reference.path.hashCode == other.reference.path.hashCode;
 }
 
 Map<String, dynamic> createProjectActivityRecordData({
@@ -115,4 +124,24 @@ Map<String, dynamic> createProjectActivityRecordData({
   );
 
   return firestoreData;
+}
+
+class ProjectActivityRecordDocumentEquality
+    implements Equality<ProjectActivityRecord> {
+  const ProjectActivityRecordDocumentEquality();
+
+  @override
+  bool equals(ProjectActivityRecord? e1, ProjectActivityRecord? e2) {
+    return e1?.id == e2?.id &&
+        e1?.desc == e2?.desc &&
+        e1?.projectId == e2?.projectId &&
+        e1?.companyId == e2?.companyId;
+  }
+
+  @override
+  int hash(ProjectActivityRecord? e) =>
+      const ListEquality().hash([e?.id, e?.desc, e?.projectId, e?.companyId]);
+
+  @override
+  bool isValidKey(Object? o) => o is ProjectActivityRecord;
 }

@@ -21,7 +21,6 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
   late ReviewOrderModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -33,7 +32,6 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -42,7 +40,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -62,7 +60,7 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.75,
+                      height: MediaQuery.sizeOf(context).height * 0.75,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
@@ -147,10 +145,9 @@ class _ReviewOrderWidgetState extends State<ReviewOrderWidget> {
                                       return SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              2.0,
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  2.0,
                                           child: DataTable2(
                                             columns: [
                                               DataColumn2(

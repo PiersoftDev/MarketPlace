@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 class VerifyCodeModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for otp widget.
   TextEditingController? otp;
   String? Function(BuildContext, String?)? otpValidator;
@@ -21,9 +22,11 @@ class VerifyCodeModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     otp?.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }
